@@ -49,7 +49,7 @@ const LandingPage = () => {
             headingFont.className
           )}
         >
-          <Link href="/auth">Get Task Manager!</Link>
+          <Link href="/sign-up">Get Task Manager!</Link>
         </span>
       </Button>
     </div>
