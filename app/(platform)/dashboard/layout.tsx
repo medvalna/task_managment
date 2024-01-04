@@ -1,12 +1,18 @@
 "use client";
 
-import { Navbar } from "./_components/navbar";
+import { SideBar } from "./_components/sidebar";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="h-full">
-      <Navbar />
-      <main className="pt-40 pb-20 bg-slate-100">{children}</main>
+    <div>
+      <main className="mx-auto">
+        <div className="flex">
+          <div className="w-64 shrink-0 hidden md:block">
+             <SideBar/>
+          </div>
+          {children}
+        </div>
+      </main>
     </div>
   );
 };
