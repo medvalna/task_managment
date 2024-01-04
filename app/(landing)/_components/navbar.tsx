@@ -20,7 +20,7 @@ export const Navbar = () => {
         >
           <Button
             variant="outline"
-            className={cn("outline outline-2 mb-2 mt-2 px-2 py-1 rounded-lg text-lg text-black hover:bg-slate-300", headingFont.className)}
+            className={cn("outline outline-2 mb-2 mt-2 px-2 py-1 rounded-lg text-lg text-violet-950 hover:bg-violet-300", headingFont.className)}
             asChild
           >
             <Link href="/sign-in">Login</Link>
@@ -28,7 +28,7 @@ export const Navbar = () => {
           <Button
             variant="default"
             className={cn(
-              "mb-2 mt-2 px-2 py-1 rounded-lg bg-black text-lg text-white hover:bg-slate-700",
+              "mb-2 mt-2 px-2 py-1 rounded-lg bg-violet-950 text-lg text-white hover:bg-violet-300 hover:text-violet-950",
               headingFont.className
             )}
             asChild
