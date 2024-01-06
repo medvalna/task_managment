@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "json-server": "json-server --watch data/todos.json --port 3001"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.1",
@@ -21,15 +22,19 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
-    "usehooks-ts": "^2.9.1"
+    "usehooks-ts": "^2.9.1",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.0.1",
+    "daisyui": "^4.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.0.4",
+    "json-server": "^0.17.4",
     "postcss": "^8",
     "prisma": "^5.7.1",
     "tailwindcss": "^3.3.0",
