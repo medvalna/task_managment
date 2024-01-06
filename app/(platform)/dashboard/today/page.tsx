@@ -22,6 +22,7 @@ const confirmationModalOpen = Boolean;
         <div className={cn("text-2xl text-violet-950", headingFont.className)}>
           Today
         </div>
+        <Modal/>
       </div>
       <TodoList tasks={tasks} />
     </div>
