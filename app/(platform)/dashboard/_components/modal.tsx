@@ -1,12 +1,12 @@
 "use client";
-import React, { FormEventHandler, useState } from "react";
+import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { Poppins } from "next/font/google";
 import { addTodo } from "@/api";
 import { useRouter } from "next/navigation";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 const headingFont = Poppins({
   subsets: ["latin"],
   weight: ["400"],
@@ -16,6 +16,17 @@ const Modal = () => {
   const router = useRouter();
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setnewTask] = useState<string>("");
+  const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+    await addTodo({
+      id: uuidv4(),
+      text: newTask,
+    });
+    setnewTask("");
+    //TODO: decide if we want to close modal after entering the task
+    //setShowModal(false);
+    router.refresh();
+  };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     await addTodo({
@@ -88,9 +99,8 @@ const Modal = () => {
                     Close
                   </button>
                   <button
-                    type="submit"
                     className="bg-violet-500 text-white hover:bg-violet-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    onClick={() => setShowModal(false)}
+                    onClick={handleSaveButton}
                   >
                     Save Changes
                   </button>
