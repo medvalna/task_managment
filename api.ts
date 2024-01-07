@@ -36,3 +36,18 @@ export const deleteTodo = async(taskId: string): Promise<void> =>{
   console.log("Task deleted successfully");
 }
 
+export const editTodo = async(todo: ITask): Promise<void> =>{
+  const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todo),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to update task");
+  }
+
+  console.log("Task updated successfully");
+}
