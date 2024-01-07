@@ -19,3 +19,20 @@ export const addTodo = async (todo: ITask): Promise<ITask> => {
   const newTodo = await res.json();
   return newTodo;
 };
+
+
+export const deleteTodo = async(taskId: string): Promise<void> =>{
+  const response = await fetch(`${baseUrl}/tasks/${taskId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to delete task");
+  }
+
+  console.log("Task deleted successfully");
+}
+
