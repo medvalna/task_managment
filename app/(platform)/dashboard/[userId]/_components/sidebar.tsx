@@ -1,11 +1,12 @@
+`use server`;
 import { Button } from "@/components/ui/button";
 import React from "react";
 import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { Plus } from "lucide-react";
-import { Separator } from "@radix-ui/react-separator";
+import { getUserId } from "@/app/api";
+import { UsrButton } from "./userButton";
 import { UserButton } from "@clerk/nextjs";
 
 const headingFont = Poppins({
@@ -13,7 +14,8 @@ const headingFont = Poppins({
   weight: ["400"],
 });
 
-export const SideBar = () => {
+export const SideBar = async () => {
+  const userId = await getUserId();
   return (
     <>
       <div className=" h-screen bg-violet-100 pt-5 pl-2 shadow-lg">
@@ -21,7 +23,7 @@ export const SideBar = () => {
           <UserButton afterSignOutUrl="/" />
           <span className="ml-2">Dashboard</span>
         </div>
-        
+
         <div className="flex items-center space-x-4 md:w-auto justify-between w-full">
           <Button
             variant="outline"
@@ -31,7 +33,7 @@ export const SideBar = () => {
             )}
             asChild
           >
-            <Link href="/dashboard/today"> Today</Link>
+            <Link href={"/dashboard/" + userId + "/today/"}> Today</Link>
           </Button>
         </div>
         <div className="flex items-center space-x-4 md:w-auto justify-between w-full">
@@ -43,7 +45,7 @@ export const SideBar = () => {
             )}
             asChild
           >
-            <Link href="/dashboard/project">Project</Link>
+            <Link href={"/dashboard/" + userId + "/project/"}>Project</Link>
           </Button>
         </div>
       </div>
