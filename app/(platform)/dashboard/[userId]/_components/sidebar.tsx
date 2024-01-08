@@ -6,7 +6,6 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { getUserId } from "@/app/api";
-import { UsrButton } from "./userButton";
 import { UserButton } from "@clerk/nextjs";
 
 const headingFont = Poppins({
