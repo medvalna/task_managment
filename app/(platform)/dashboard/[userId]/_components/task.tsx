@@ -7,7 +7,7 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler, MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteTodo, editTodo } from "@/api";
+import { deleteTodo, editTodo } from "@/app/api";
 import React from "react";
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -35,14 +35,14 @@ const Task: React.FC<TasksProps> = ({ task }) => {
   };
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await editTodo({ id: task.id, text: newTask });
+    await editTodo(task.id, newTask);
     setShowModal(false);
     router.refresh();
   };
 
   const handleEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await editTodo({ id: task.id, text: newTask });
+    await editTodo(task.id, newTask);
     setShowModal(false);
     router.refresh();
   };

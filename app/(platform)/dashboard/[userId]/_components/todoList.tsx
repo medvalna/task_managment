@@ -27,9 +27,9 @@ const TodoList: React.FC<TodoListProps> = ({ tasks }) => {
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task) => (
+          {(Array.isArray(tasks) && tasks.length) ? tasks.map((task) => (
             <Task key={task.id} task={task} />
-          ))}
+          )): null}
         </tbody>
       </table>
     </div>
