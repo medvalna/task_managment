@@ -1,8 +1,8 @@
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { getAllTodos } from "@/app/api";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
+import { getAllTodos } from "@/app/apiTasks";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -10,7 +10,7 @@ const headingFont = Poppins({
 });
 const DashboardPage = async () => {
 
-  const tasks = await getAllTodos();
+  const tasks = await getAllTodos(`today`);
   return (
     <div className=" bg-violet-50 h-screen w-screen">
       <div className="text-left my-5 mx-5 flex space-x-2">

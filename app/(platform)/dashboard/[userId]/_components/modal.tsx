@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { Poppins } from "next/font/google";
-import { addTodo } from "@/app/api";
+import { addTodo } from "@/app/apiTasks";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 const headingFont = Poppins({
@@ -18,7 +18,7 @@ const Modal = () => {
   const [newTask, setnewTask] = useState<string>("");
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask);
+    await addTodo(uuidv4(), newTask, "today" );
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -26,7 +26,7 @@ const Modal = () => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask);
+    await addTodo(uuidv4(), newTask, "today");
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);

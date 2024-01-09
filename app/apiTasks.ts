@@ -11,9 +11,10 @@ export const getUserId = async (): Promise<string> => {
   }
   return userId;
 };
-export const getAllTodos = async (): Promise<ITask[]> => {
+export const getAllTodos = async (project: string): Promise<ITask[]> => {
   const userId = await getUserId();
-  const res = await fetch(`${baseUrl}/tasks?userId=${userId}`, {
+  console.log(project);
+  const res = await fetch(`${baseUrl}/tasks?userId=${userId}&projects=${project}`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -25,12 +26,13 @@ export const getAllTodos = async (): Promise<ITask[]> => {
   return todos;
 };
 
-export const addTodo = async (todoId: string, text: string): Promise<ITask> => {
+export const addTodo = async (todoId: string, text: string, project: string): Promise<ITask> => {
   const userId = await getUserId();
   const todo: ITask = {
     id: todoId,
     text: text,
     userId: userId,
+    project: project,
   };
   const res = await fetch(`${baseUrl}/tasks?userId=${userId}`, {
     method: "POST",
@@ -68,6 +70,7 @@ export const editTodo = async(todoId: string, newTask: string): Promise<void> =>
     id: todoId,
     text: newTask,
     userId: userId,
+    project: `today`,
   };
   const response = await fetch(`${baseUrl}/tasks/${todo.id}?userId=${userId}`, {
     method: "PATCH",
