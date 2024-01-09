@@ -5,8 +5,10 @@ import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { getUserId } from "@/app/api";
+import { getUserId } from "@/app/apiTasks";
 import { UserButton } from "@clerk/nextjs";
+import ModalProject from "./modalProjects";
+import Modal from "./modal";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -23,7 +25,7 @@ export const SideBar = async () => {
           <span className="ml-2">Dashboard</span>
         </div>
 
-        <div className="flex items-center space-x-4 md:w-auto justify-between w-full">
+        <div className="flex items-center space-x-4 md:w-auto justify-between w-full mr-2">
           <Button
             variant="outline"
             className={cn(
@@ -34,8 +36,9 @@ export const SideBar = async () => {
           >
             <Link href={"/dashboard/" + userId + "/today/"}> Today</Link>
           </Button>
+          <Modal/>
         </div>
-        <div className="flex items-center space-x-4 md:w-auto justify-between w-full">
+        <div className="flex items-center space-x-4 md:w-auto justify-between w-full mr-2">
           <Button
             variant="outline"
             className={cn(
@@ -44,8 +47,9 @@ export const SideBar = async () => {
             )}
             asChild
           >
-            <Link href={"/dashboard/" + userId + "/project/"}>Project</Link>
+            <Link href={"/dashboard/" + userId + "/project/main/"}>Project</Link>
           </Button>
+          <ModalProject/>
         </div>
       </div>
     </>

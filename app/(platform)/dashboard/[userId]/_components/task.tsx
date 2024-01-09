@@ -7,7 +7,7 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler, MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteTodo, editTodo } from "@/app/api";
+import { deleteTodo, editTodo } from "@/app/apiTasks";
 import React from "react";
 const headingFont = Poppins({
   subsets: ["latin"],
