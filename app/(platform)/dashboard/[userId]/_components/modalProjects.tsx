@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 import { Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import { addProject } from "@/app/apiProjects";
+import { addProject } from "@/app/(api)/apiProjects";
 const headingFont = Poppins({
   subsets: ["latin"],
   weight: ["400"],

@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
-import { getAllTodos } from "@/app/apiTasks";
+import { getAllTodos } from "@/app/(api)/apiTasks";
 
 const headingFont = Poppins({
   subsets: ["latin"],

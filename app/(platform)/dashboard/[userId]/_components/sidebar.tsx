@@ -5,7 +5,7 @@ import { Poppins } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { getUserId } from "@/app/apiTasks";
+import { getUserId } from "@/app/(api)/apiTasks";
 import { UserButton } from "@clerk/nextjs";
 import ModalProject from "./modalProjects";
 import Modal from "./modal";

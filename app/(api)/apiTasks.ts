@@ -1,5 +1,5 @@
 "use server";
-import { ITask } from "../types/tasks";
+import { ITask } from "../../types/tasks";
 import { auth } from "@clerk/nextjs";
 const baseUrl = "http://localhost:3001";
 
