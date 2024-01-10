@@ -5,7 +5,6 @@ const baseUrl = "http://localhost:3001";
 
 export const getUserId = async (): Promise<string> => {
   const { userId } = auth();
-  console.log(userId);
   if (!userId) {
     throw new Error("not logged in");
   }
@@ -13,7 +12,6 @@ export const getUserId = async (): Promise<string> => {
 };
 export const getAllTodos = async (project: string): Promise<ITask[]> => {
   const userId = await getUserId();
-  console.log(project);
   const res = await fetch(`${baseUrl}/tasks?userId=${userId}&projects=${project}`, {
     cache: "no-store",
   });

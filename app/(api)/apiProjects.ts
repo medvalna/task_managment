@@ -5,7 +5,6 @@ const baseUrl = "http://localhost:3001";
 
 export const getUserId = async (): Promise<string> => {
   const { userId } = auth();
-  console.log(userId);
   if (!userId) {
     throw new Error("not logged in");
   }
