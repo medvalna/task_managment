@@ -28,11 +28,11 @@ export const SideBar = async () => {
           <span className="ml-2">Dashboard</span>
         </div>
 
-        <div className="flex items-center space-x-4 md:w-auto justify-between w-full mr-2">
+        <div className="flex items-center justify-between w-full mr-2">
           <Button
             variant="outline"
             className={cn(
-              "pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-300",
+              "pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300",
               headingFont.className
             )}
             asChild

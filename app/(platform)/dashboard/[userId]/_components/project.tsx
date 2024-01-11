@@ -15,10 +15,10 @@ interface ProjectsProps {
 
 const Project: React.FC<ProjectsProps> = ({ project, userId }) => {
   return (
-    <li key={project.id}>
+    <li key={project.id} className="flex items-center space-x-4 md:w-auto justify-between w-full">
       <Button
         asChild
-        className={cn("text-left text-violet-950 py-1", headingFont.className)}
+        className={cn("pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300", headingFont.className)}
       >
         <Link href={{pathname: "/dashboard/"+userId+"/project/" + project.id, query:project.text }}> {project.text}</Link>
         
