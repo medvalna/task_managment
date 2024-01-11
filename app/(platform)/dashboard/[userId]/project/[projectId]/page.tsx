@@ -3,27 +3,29 @@ import Modal from "../../_components/modal";
 import TodoList from "../../_components/todoList";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 const headingFont = Poppins({
   subsets: ["latin"],
   weight: ["400"],
 });
 
-const ProjectPage = async () => {
-  
-  const tasks = await getAllTodos(`sport`);
-  //const router = useRouter();
- 
+const ProjectPage = async ({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined }
+}) => {
+  const pageName= searchParams["name"] ?? "";
+  const tasks = await getAllTodos(`${pageName}`);
   return (
     <div className=" bg-violet-50 h-screen w-screen">
       <div className="text-left my-5 mx-5 flex space-x-2">
         <div className={cn("text-2xl text-violet-950", headingFont.className)}>
-          Sport
+          {pageName}
         </div>
-        <Modal />
+        <Modal project= {pageName}/>
       </div>
-      <TodoList tasks={tasks} />
+      <TodoList tasks={tasks} project= {pageName} />
     </div>
   );
 };
