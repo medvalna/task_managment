@@ -12,7 +12,7 @@ export const getUserId = async (): Promise<string> => {
 };
 export const getAllTodos = async (project: string): Promise<ITask[]> => {
   const userId = await getUserId();
-  const res = await fetch(`${baseUrl}/tasks?userId=${userId}&projects=${project}`, {
+  const res = await fetch(`${baseUrl}/tasks?userId=${userId}&project=${project}`, {
     cache: "no-store",
   });
   if (!res.ok) {
@@ -62,13 +62,13 @@ export const deleteTodo = async(taskId: string): Promise<void> =>{
   console.log("Task deleted successfully");
 }
 
-export const editTodo = async(todoId: string, newTask: string): Promise<void> =>{
+export const editTodo = async(todoId: string, newTask: string, project: string): Promise<void> =>{
   const userId = await getUserId();
   const todo: ITask = {
     id: todoId,
     text: newTask,
     userId: userId,
-    project: `today`,
+    project: project,
   };
   const response = await fetch(`${baseUrl}/tasks/${todo.id}?userId=${userId}`, {
     method: "PATCH",

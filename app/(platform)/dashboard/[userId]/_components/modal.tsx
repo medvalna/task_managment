@@ -11,14 +11,16 @@ const headingFont = Poppins({
   subsets: ["latin"],
   weight: ["400"],
 });
-
-const Modal = () => {
+interface ModalProps {
+  project: string;
+}
+const Modal: React.FC<ModalProps> = ({ project }) => {
   const router = useRouter();
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setnewTask] = useState<string>("");
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, "today" );
+    await addTodo(uuidv4(), newTask, project);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -26,7 +28,7 @@ const Modal = () => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, "today");
+    await addTodo(uuidv4(), newTask, project);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);

@@ -31,18 +31,17 @@ const Task: React.FC<TasksProps> = ({ task }) => {
   const handleDoneTodo: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     setshowDoneTask(!showDoneTask);
-    console.log(showDoneTask);
   };
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask);
+    await editTodo(task.id, newTask, task.project);
     setShowModal(false);
     router.refresh();
   };
 
   const handleEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask);
+    await editTodo(task.id, newTask, task.project);
     setShowModal(false);
     router.refresh();
   };

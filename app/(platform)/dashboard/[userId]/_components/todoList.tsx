@@ -11,8 +11,9 @@ const headingFont = Poppins({
 });
 interface TodoListProps {
   tasks: ITask[];
+  project: string;
 }
-const TodoList: React.FC<TodoListProps> = ({ tasks }) => {
+const TodoList: React.FC<TodoListProps> = ({ tasks, project }) => {
   return (
     <>
       <div className="flex items-left gap-6 mx-24 mt-12 mb-5">
@@ -46,7 +47,7 @@ const TodoList: React.FC<TodoListProps> = ({ tasks }) => {
       </div>
       <div className="border-b-2 border-gray-300 mr-60 ml-24"></div>
       <div className="float-right mr-60">
-        <Modal />
+        <Modal project = {project}/>
       </div>
     </>
   );
