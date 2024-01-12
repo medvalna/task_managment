@@ -1,15 +1,10 @@
 "use server";
 import { IProject } from "@/types/projects";
-import { auth } from "@clerk/nextjs";
+import { getUserId } from "./apiUser";
+
 const baseUrl = "http://localhost:3001";
 
-export const getUserId = async (): Promise<string> => {
-  const { userId } = auth();
-  if (!userId) {
-    throw new Error("not logged in");
-  }
-  return userId;
-};
+
 export const getAllProjects = async (): Promise<IProject[]> => {
     const userId = await getUserId();
     const res = await fetch(`${baseUrl}/projects?userId=${userId}`, {
