@@ -14,3 +14,5 @@ Application for task managment
 - main landing page
 - sign-in page
 - sign-up page
+- page for todays tasks
+- custom project pages
