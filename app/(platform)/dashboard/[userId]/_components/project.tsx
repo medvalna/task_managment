@@ -20,7 +20,7 @@ const Project: React.FC<ProjectsProps> = ({ project, userId }) => {
         asChild
         className={cn("pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300", headingFont.className)}
       >
-        <Link href={{pathname: "/dashboard/"+userId+"/project/" + project.id, query:{name: project.text} }}> {project.text}</Link>
+        <Link href={{pathname: "/dashboard/"+userId+"/project/" + project.id, query:{name: project.text, id:project.id} }}> {project.text}</Link>
         
       </Button>
     </li>

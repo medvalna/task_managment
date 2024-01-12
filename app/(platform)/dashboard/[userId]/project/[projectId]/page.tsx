@@ -4,6 +4,7 @@ import TodoList from "../../_components/todoList";
 import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { useRouter} from "next/navigation";
+import ModalProject from "../../_components/modalProjects";
 
 const headingFont = Poppins({
   subsets: ["latin"],
@@ -16,6 +17,7 @@ const ProjectPage = async ({
   searchParams: { [key: string]: string | undefined }
 }) => {
   const pageName= searchParams["name"] ?? "";
+  const pageID= searchParams["id"] ?? "";
   const tasks = await getAllTodos(`${pageName}`);
   return (
     <div className=" bg-violet-50 h-screen w-screen">
@@ -24,6 +26,7 @@ const ProjectPage = async ({
           {pageName}
         </div>
         <Modal project= {pageName}/>
+        <ModalProject isEditing = {true} projectName = {pageName} projectId = {pageID}/>
       </div>
       <TodoList tasks={tasks} project= {pageName} />
     </div>

@@ -6,17 +6,24 @@ import { Plus } from "lucide-react";
 import { Poppins } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import { addProject } from "@/app/(api)/apiProjects";
+import { addProject, editProject } from "@/app/(api)/apiProjects";
+import { FaPen } from "react-icons/fa";
 const headingFont = Poppins({
   subsets: ["latin"],
   weight: ["400"],
 });
-
-const ModalProject = () => {
+interface ModalProjectProps {
+  isEditing: boolean;
+  projectName: string;
+  projectId: string;
+}
+const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, projectId }) => {
   const router = useRouter();
   const [showModal, setShowModal] = React.useState(false);
-  const [newProject, setnewProject] = useState<string>("");
-  const handleSaveProjButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
+  const [newProject, setnewProject] = useState<string>(projectName);
+  const handleSaveProjButton: MouseEventHandler<HTMLButtonElement> = async (
+    e
+  ) => {
     e.preventDefault();
     await addProject(uuidv4(), newProject);
     setnewProject("");
@@ -24,9 +31,31 @@ const ModalProject = () => {
     setShowModal(false);
     router.refresh();
   };
-  const handleSubmitNewProject: FormEventHandler<HTMLFormElement> = async (e) => {
+  const handleSubmitNewProject: FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
     e.preventDefault();
     await addProject(uuidv4(), newProject);
+    setnewProject("");
+    //TODO: decide if we want to close modal after entering the task
+    setShowModal(false);
+    router.refresh();
+  };
+  const handleEditProjButton: MouseEventHandler<HTMLButtonElement> = async (
+    e
+  ) => {
+    e.preventDefault();
+    await editProject(projectId, newProject);
+    setnewProject("");
+    //TODO: decide if we want to close modal after entering the task
+    setShowModal(false);
+    router.refresh();
+  };
+  const handleSubmitEditProject: FormEventHandler<HTMLFormElement> = async (
+    e
+  ) => {
+    e.preventDefault();
+    await editProject(projectId, newProject);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
@@ -36,14 +65,16 @@ const ModalProject = () => {
     <>
       <Button
         variant="outline"
-        className={cn(
-          " px-2 py-1 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+        className={isEditing?(cn(
+          " px-3 py-3 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
           headingFont.className
-        )}
+        )):(cn(
+          " px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+          headingFont.className))}
         asChild
         onClick={() => setShowModal(true)}
       >
-        <Plus className="text-violet-950" />
+        {isEditing? (<FaPen className="text-violet-950 py-2 px-2" />) :<Plus className="text-violet-950" />}
       </Button>
       {showModal ? (
         <>
@@ -53,14 +84,25 @@ const ModalProject = () => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3
-                    className={cn(
-                      "text-2xl font-semibold",
-                      headingFont.className
-                    )}
-                  >
-                    Add new project
-                  </h3>
+                  {isEditing ? (
+                    <h3
+                      className={cn(
+                        "text-2xl font-semibold",
+                        headingFont.className
+                      )}
+                    >
+                      Edit Project
+                    </h3>
+                  ) : (
+                    <h3
+                      className={cn(
+                        "text-2xl font-semibold",
+                        headingFont.className
+                      )}
+                    >
+                      Add Project
+                    </h3>
+                  )}
                   <button
                     className=" text-slate-600 hover:text-black text-3xl"
                     onClick={() => setShowModal(false)}
@@ -72,7 +114,7 @@ const ModalProject = () => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <form onSubmit={handleSubmitNewProject}>
+                  <form onSubmit={isEditing?handleSubmitEditProject:handleSubmitNewProject}>
                     <input
                       autoFocus
                       value={newProject}
@@ -94,7 +136,7 @@ const ModalProject = () => {
                   </button>
                   <button
                     className="bg-violet-500 text-white hover:bg-violet-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    onClick={handleSaveProjButton}
+                    onClick={isEditing?handleEditProjButton:handleSaveProjButton}
                   >
                     Save Changes
                   </button>
