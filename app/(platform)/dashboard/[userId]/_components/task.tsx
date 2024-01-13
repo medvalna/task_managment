@@ -48,8 +48,8 @@ const Task: React.FC<TasksProps> = ({ task }) => {
   };
 
   return (
-    <tr key={task.id}>
-      <td className="">
+    <tr key={task.id} className="flex mb-4">
+      <td className="flex w-3/4">
         {task.isDone ? (
           <MdCheckBox cursor="pointer" size={25} onClick={handleDoneTodo} />
         ) : (
@@ -59,18 +59,18 @@ const Task: React.FC<TasksProps> = ({ task }) => {
             onClick={handleDoneTodo}
           />
         )}
+        <div
+          className={cn(
+            "text-left pl-5 pr-10 " +
+              (task.isDone ? "text-slate-700 line-through" : "text-black"),
+            headingFont.className
+          )}
+        >
+          {task.text}
+        </div>
       </td>
 
-      <td
-        className={cn(
-          "text-left pl-5 pr-10 " +
-            (task.isDone ? "text-slate-700 line-through" : "text-black"),
-          headingFont.className
-        )}
-      >
-        {task.text}
-      </td>
-      <td className="flex gap-5">
+      <td className="flex w-1/4 ">
         <FaEdit cursor="pointer" size={25} onClick={() => setShowModal(true)} />
         <FaRegTrashAlt cursor="pointer" size={25} onClick={handleDeleteTodo} />
         {showModal ? (
