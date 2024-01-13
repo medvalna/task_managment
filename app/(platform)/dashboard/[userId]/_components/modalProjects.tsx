@@ -16,8 +16,9 @@ interface ModalProjectProps {
   isEditing: boolean;
   projectName: string;
   projectId: string;
+  userId: string;
 }
-const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, projectId }) => {
+const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, projectId, userId }) => {
   const router = useRouter();
   const [showModal, setShowModal] = React.useState(false);
   const [newProject, setnewProject] = useState<string>(projectName);
@@ -29,7 +30,6 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
-    router.refresh();
   };
   const handleSubmitNewProject: FormEventHandler<HTMLFormElement> = async (
     e
@@ -49,6 +49,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
+    router.push(`/dashboard/${userId}/project/${projectId}?name=${newProject}&id=${projectId}`);
     router.refresh();
   };
   const handleSubmitEditProject: FormEventHandler<HTMLFormElement> = async (
@@ -59,6 +60,8 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
+    
+    router.push(`/dashboard/${userId}/project/${projectId}?name=${newProject}&id=${projectId}`);
     router.refresh();
   };
   return (

@@ -16,7 +16,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ projectId,projectName}) => 
         e.preventDefault();
         router.push('/')
         await deleteProject(projectId, projectName);
-        
+        router.refresh();
       };
     return(<IoTrashBinOutline className = "rounded-lg hover:bg-violet-300 py-3 w-10 h-10" onClick={handleDeleteProjButton} />);
 

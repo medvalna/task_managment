@@ -45,7 +45,7 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
           </div>
         </Button>
 
-        <ModalProject isEditing = {false} projectName="" projectId=""/>
+        <ModalProject isEditing = {false} projectName="" projectId="" userId=""/>
       </div>
       {isOpen && (
         <div

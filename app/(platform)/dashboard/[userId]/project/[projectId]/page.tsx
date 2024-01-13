@@ -5,6 +5,7 @@ import { Poppins } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ModalProject from "../../_components/modalProjects";
 import DeleteButton from "../../_components/deleteButton";
+import { getUserId } from "@/app/(api)/apiUser";
 
 
 const headingFont = Poppins({
@@ -19,6 +20,7 @@ const ProjectPage = async ({
 }) => {
   const projectName = searchParams["name"] ?? "";
   const projectId = searchParams["id"] ?? "";
+  const userId =await getUserId();
   const tasks = await getAllTodos(`${projectName}`);
  
   return (
@@ -32,6 +34,7 @@ const ProjectPage = async ({
           isEditing={true}
           projectName={projectName}
           projectId={projectId}
+          userId={userId}
         />
         <DeleteButton projectId={projectId} projectName={projectName}/>
         
