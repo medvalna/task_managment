@@ -3,12 +3,14 @@ import { ITask } from "../../types/tasks";
 import { getUserId } from "./apiUser";
 const baseUrl = "http://localhost:3001";
 
-
 export const getAllTodos = async (project: string): Promise<ITask[]> => {
   const userId = await getUserId();
-  const res = await fetch(`${baseUrl}/tasks?userId=${userId}&project=${project}`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${baseUrl}/tasks?userId=${userId}&project=${project}`,
+    {
+      cache: "no-store",
+    }
+  );
   if (!res.ok) {
     console.log("Failed to get tasks");
   }
@@ -18,7 +20,11 @@ export const getAllTodos = async (project: string): Promise<ITask[]> => {
   return todos;
 };
 
-export const addTodo = async (todoId: string, text: string, project: string): Promise<ITask> => {
+export const addTodo = async (
+  todoId: string,
+  text: string,
+  project: string
+): Promise<ITask> => {
   const userId = await getUserId();
   const todo: ITask = {
     id: todoId,
@@ -40,9 +46,8 @@ export const addTodo = async (todoId: string, text: string, project: string): Pr
   return newTodo;
 };
 
-export const deleteTodo = async(taskId: string): Promise<void> =>{
-  const userId = await getUserId();
-  const response = await fetch(`${baseUrl}/tasks/${taskId}?userId=${userId}`, {
+export const deleteTodo = async (taskId: string): Promise<void> => {
+  const response = await fetch(`${baseUrl}/tasks/${taskId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -54,9 +59,13 @@ export const deleteTodo = async(taskId: string): Promise<void> =>{
   }
 
   console.log("Task deleted successfully");
-}
+};
 
-export const editTodo = async(todoId: string, newTask: string, project: string): Promise<void> =>{
+export const editTodo = async (
+  todoId: string,
+  newTask: string,
+  project: string
+): Promise<void> => {
   const userId = await getUserId();
   const todo: ITask = {
     id: todoId,
@@ -64,7 +73,7 @@ export const editTodo = async(todoId: string, newTask: string, project: string):
     userId: userId,
     project: project,
   };
-  const response = await fetch(`${baseUrl}/tasks/${todo.id}?userId=${userId}`, {
+  const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
@@ -77,4 +86,4 @@ export const editTodo = async(todoId: string, newTask: string, project: string):
   }
 
   console.log("Task updated successfully");
-}
+};
