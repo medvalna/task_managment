@@ -39,7 +39,7 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
       <Button
         variant="outline"
         className={cn(
-          " px-2 py-1 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+          " px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
           headingFont.className
         )}
         asChild
