@@ -10,16 +10,16 @@ const headingFont = Poppins({
 });
 const DashboardPage = async () => {
 
-  const tasks = await getAllTodos(`today`);
+  const tasks = await getAllTodos("today");
   return (
     <div className=" bg-violet-50 h-screen w-screen">
       <div className="text-left my-5 mx-5 flex space-x-2">
         <div className={cn("text-2xl text-violet-950", headingFont.className)}>
           Today
         </div>
-        <Modal/>
+        <Modal project="today"/>
       </div>
-      <TodoList tasks={tasks} />
+      <TodoList tasks={tasks} project="today"/>
     </div>
   );
 };
