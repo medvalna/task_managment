@@ -4,6 +4,7 @@ import { ITask } from "@/types/tasks";
 import { Poppins } from "next/font/google";
 import { FaEdit } from "react-icons/fa";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler, MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -19,7 +20,6 @@ interface TasksProps {
 }
 const Task: React.FC<TasksProps> = ({ task }) => {
   const router = useRouter();
-  const [showDoneTask, setshowDoneTask] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setNewTask] = useState<string>(task.text);
   const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
@@ -30,28 +30,41 @@ const Task: React.FC<TasksProps> = ({ task }) => {
   };
   const handleDoneTodo: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    setshowDoneTask(!showDoneTask);
+    editTodo(task.id, task.text, task.project, !task.isDone);
+    router.refresh();
   };
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask, task.project);
+    await editTodo(task.id, newTask, task.project, task.isDone);
     setShowModal(false);
     router.refresh();
   };
 
   const handleEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask, task.project);
+    await editTodo(task.id, newTask, task.project, task.isDone);
     setShowModal(false);
     router.refresh();
   };
 
   return (
     <tr key={task.id}>
+      <td className="">
+        {task.isDone ? (
+          <MdCheckBox cursor="pointer" size={25} onClick={handleDoneTodo} />
+        ) : (
+          <MdCheckBoxOutlineBlank
+            cursor="pointer"
+            size={25}
+            onClick={handleDoneTodo}
+          />
+        )}
+      </td>
+
       <td
         className={cn(
           "text-left pl-5 pr-10 " +
-            (showDoneTask ? "text-slate-700 line-through" : "text-black"),
+            (task.isDone ? "text-slate-700 line-through" : "text-black"),
           headingFont.className
         )}
       >
@@ -59,11 +72,6 @@ const Task: React.FC<TasksProps> = ({ task }) => {
       </td>
       <td className="flex gap-5">
         <FaEdit cursor="pointer" size={25} onClick={() => setShowModal(true)} />
-        <MdCheckBoxOutlineBlank
-          cursor="pointer"
-          size={25}
-          onClick={handleDoneTodo}
-        />
         <FaRegTrashAlt cursor="pointer" size={25} onClick={handleDeleteTodo} />
         {showModal ? (
           <>

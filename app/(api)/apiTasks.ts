@@ -31,6 +31,7 @@ export const addTodo = async (
     text: text,
     userId: userId,
     project: project,
+    isDone: false
   };
   const res = await fetch(`${baseUrl}/tasks?userId=${userId}`, {
     method: "POST",
@@ -64,7 +65,8 @@ export const deleteTodo = async (taskId: string): Promise<void> => {
 export const editTodo = async (
   todoId: string,
   newTask: string,
-  project: string
+  project: string,
+  isDone: boolean,
 ): Promise<void> => {
   const userId = await getUserId();
   const todo: ITask = {
@@ -72,6 +74,7 @@ export const editTodo = async (
     text: newTask,
     userId: userId,
     project: project,
+    isDone: isDone
   };
   const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
     method: "PATCH",
