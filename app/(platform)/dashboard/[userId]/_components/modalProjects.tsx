@@ -45,7 +45,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await editProject(projectId, newProject);
+    await editProject(projectId, newProject, projectName);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
@@ -55,7 +55,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await editProject(projectId, newProject);
+    await editProject(projectId, newProject, projectName);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
