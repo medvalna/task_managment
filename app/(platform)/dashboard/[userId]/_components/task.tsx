@@ -51,9 +51,10 @@ const Task: React.FC<TasksProps> = ({ task }) => {
     <tr key={task.id} className="flex mb-4">
       <td className="flex w-3/4">
         {task.isDone ? (
-          <MdCheckBox cursor="pointer" size={25} onClick={handleDoneTodo} />
+          <MdCheckBox className = "text-violet-950" cursor="pointer" size={25} onClick={handleDoneTodo} />
         ) : (
           <MdCheckBoxOutlineBlank
+          className = "text-violet-950"
             cursor="pointer"
             size={25}
             onClick={handleDoneTodo}
@@ -62,7 +63,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
         <div
           className={cn(
             "text-left pl-5 pr-10 " +
-              (task.isDone ? "text-slate-700 line-through" : "text-black"),
+              (task.isDone ? "text-slate-700 line-through" : "text-violet-900"),
             headingFont.className
           )}
         >
@@ -70,9 +71,9 @@ const Task: React.FC<TasksProps> = ({ task }) => {
         </div>
       </td>
 
-      <td className="flex w-1/4 ">
-        <FaEdit cursor="pointer" size={25} onClick={() => setShowModal(true)} />
-        <FaRegTrashAlt cursor="pointer" size={25} onClick={handleDeleteTodo} />
+      <td className="flex w-1/4 gap-2">
+        <FaEdit className = "text-violet-950" cursor="pointer" size={25} onClick={() => setShowModal(true)} />
+        <FaRegTrashAlt className = "text-violet-950" cursor="pointer" size={25} onClick={handleDeleteTodo} />
         {showModal ? (
           <>
             <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">

@@ -37,7 +37,7 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
           )}
           onClick={handleOpen}
         >
-          <div className="flex justify-between w-full">
+          <div className="flex justify-between w-full text-violet-900">
             Project
             <span className = "hover:text-violet-700">
               <IoMdArrowDropdown className = "w-5 h-5 mt-1 mr-2"/>
