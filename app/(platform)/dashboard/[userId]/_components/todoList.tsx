@@ -10,13 +10,12 @@ const TodoList: React.FC<TodoListProps> = ({ tasks, project }) => {
   return (
     <>
       <div className=" ml-24 mt-12 mb-5">
-        <table className="table-fixed w-full">
-          <tbody>
-            {Array.isArray(tasks) && tasks.length
+        <ul>
+          {Array.isArray(tasks) && tasks.length
               ? tasks.map((task) => <Task key={task.id} task={task} />)
               : null}
-          </tbody>
-        </table>
+          
+        </ul>
         <div className="border-b-2 border-violet-300 mr-60"></div>
         <div className="flex">
           <div className="w-3/4"></div>
