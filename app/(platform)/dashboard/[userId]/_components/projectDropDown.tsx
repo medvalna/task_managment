@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { IProject } from "@/types/projects";
 import { useState } from "react";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import ModalProject from "./modalProjects";
 import ProjectList from "./projectList";
 import { IoMdArrowDropdown } from "react-icons/io";
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

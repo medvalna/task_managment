@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { ITask } from "@/types/tasks";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { FaEdit } from "react-icons/fa";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
@@ -10,7 +10,7 @@ import { FormEventHandler, MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodo, editTodo } from "@/app/(api)/apiTasks";
 import React from "react";
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

@@ -1,10 +1,10 @@
 import { IProject } from "@/types/projects";
 import { cn } from "@/lib/utils";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

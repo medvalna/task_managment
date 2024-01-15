@@ -3,12 +3,12 @@ import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { addProject, editProject } from "@/app/(api)/apiProjects";
 import { FaPen } from "react-icons/fa";
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

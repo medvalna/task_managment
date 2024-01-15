@@ -1,14 +1,14 @@
 import { getAllTodos } from "@/app/(api)/apiTasks";
 import Modal from "../../_components/modal";
 import TodoList from "../../_components/todoList";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ModalProject from "../../_components/modalProjects";
 import DeleteButton from "../../_components/deleteButton";
 import { getUserId } from "@/app/(api)/apiUser";
 
 
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

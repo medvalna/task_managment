@@ -1,6 +1,4 @@
 'use client'
-import { IoTrashBinOutline } from "react-icons/io5";
-import { Button } from "@/components/ui/button";
 import { deleteProject } from "@/app/(api)/apiProjects";
 import { MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";

@@ -1,10 +1,10 @@
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 
 import { cn } from "@/lib/utils";
 
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

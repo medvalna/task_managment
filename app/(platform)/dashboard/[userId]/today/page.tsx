@@ -1,10 +1,10 @@
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
 import { getAllTodos } from "@/app/(api)/apiTasks";
 
-const headingFont = Poppins({
+const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });

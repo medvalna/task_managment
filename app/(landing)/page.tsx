@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import Link from "next/link";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Chicle } from "next/font/google";
 
 import { cn } from "@/lib/utils";
@@ -10,7 +10,7 @@ const headingFont = Chicle({
   subsets: ["latin"],
   weight: ["400"],
 });
-const textFont = Poppins({
+const textFont = Inter({
   subsets: ["latin"],
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
