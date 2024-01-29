@@ -9,6 +9,8 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler, MouseEventHandler, useState } from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodo, editTodo } from "@/app/(api)/apiTasks";
+import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/material_green.css';
 import React from "react";
 const headingFont = Inter({
   subsets: ["latin"],
@@ -21,6 +23,7 @@ interface TasksProps {
 const Task: React.FC<TasksProps> = ({ task }) => {
   const router = useRouter();
   const [showModal, setShowModal] = React.useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>("" );
   const [newTask, setNewTask] = useState<string>(task.text);
   const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -30,19 +33,25 @@ const Task: React.FC<TasksProps> = ({ task }) => {
   };
   const handleDoneTodo: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
-    editTodo(task.id, task.text, task.project, !task.isDone);
+    const date = selectedDate.split(' ');;
+    const dateFin = date.slice(1, 4);
+    editTodo(task.id, task.text, task.project, !task.isDone, dateFin.join(' '));
     router.refresh();
   };
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask, task.project, task.isDone);
+    const date = selectedDate.split(' ');;
+    const dateFin = date.slice(1, 4);
+    await editTodo(task.id, newTask, task.project, task.isDone,  dateFin.join(' '));
     setShowModal(false);
     router.refresh();
   };
 
   const handleEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await editTodo(task.id, newTask, task.project, task.isDone);
+    const date = selectedDate.split(' ');;
+    const dateFin = date.slice(1, 4);
+    await editTodo(task.id, newTask, task.project, task.isDone,  dateFin.join(' '));
     setShowModal(false);
     router.refresh();
   };
@@ -60,15 +69,26 @@ const Task: React.FC<TasksProps> = ({ task }) => {
             onClick={handleDoneTodo}
           />
         )}
+        <div className="grid grid-cols-1 text-violet-900">
         <div
           className={cn(
-            "text-left pl-5 pr-10 " +
-              (task.isDone ? "text-violet-900 line-through" : "text-violet-900"),
+            (task.isDone ? "text-violet-900 line-through" : "text-violet-900"),
+            "row-span-1 text-left pl-5 pr-10 text-xl",
             headingFont.className
           )}
         >
           {task.text}
         </div>
+        <div
+          className={cn(
+            "row-span-2 text-left pl-5 pr-10 text-violet-900 text-sm",
+            headingFont.className
+          )}
+        >
+          {task.date}
+        </div>
+        </div>
+        
       </div>
 
       <div className="flex w-1/4 gap-2">
@@ -88,7 +108,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
                         headingFont.className
                       )}
                     >
-                      Add new task
+                      Edit task
                     </h3>
                     <button
                       className=" text-slate-600 hover:text-black text-3xl"
@@ -107,9 +127,18 @@ const Task: React.FC<TasksProps> = ({ task }) => {
                         value={newTask}
                         onChange={(e) => setNewTask(e.target.value)}
                         type="text"
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
+                        className="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
                       />
                     </form>
+                    <Flatpickr
+                    value={selectedDate}
+                    onChange={(date) => setSelectedDate(date[0].toString())}
+                    options={{
+                      dateFormat: 'Y-m-d',
+                      // You can customize the date picker options here
+                    }}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
+                  />
                   </div>
                   {/*footer*/}
                   <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
