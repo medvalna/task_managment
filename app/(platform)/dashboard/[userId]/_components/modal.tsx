@@ -7,6 +7,8 @@ import { Inter } from "next/font/google";
 import { addTodo } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
+import Flatpickr from 'react-flatpickr';
+import 'flatpickr/dist/themes/material_green.css';
 const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
@@ -15,12 +17,16 @@ interface ModalProps {
   project: string;
 }
 const Modal: React.FC<ModalProps> = ({ project }) => {
+  
   const router = useRouter();
+  const [selectedDate, setSelectedDate] = useState<string>("" );
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setnewTask] = useState<string>("");
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, project);
+    const date = selectedDate.split(' ');;
+    const dateFin = date.slice(1, 4);
+    await addTodo(uuidv4(), newTask, project, dateFin.join(' '));
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -28,7 +34,9 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, project);
+    const date = selectedDate.split(' ');;
+    const dateFin = date.slice(1, 4);
+    await addTodo(uuidv4(), newTask, project, dateFin.join(' '));
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -81,9 +89,19 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
                       onChange={(e) => setnewTask(e.target.value)}
                       type="text"
                       placeholder="Type here"
-                      className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
+                      className="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
                     />
                   </form>
+                  <Flatpickr
+                    value={selectedDate}
+                    onChange={(date) => setSelectedDate(date[0].toString())}
+                    placeholder="Choose Date"
+                    options={{
+                      dateFormat: 'Y-m-d',
+                      // You can customize the date picker options here
+                    }}
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
+                  />
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
