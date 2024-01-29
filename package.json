@@ -21,6 +21,7 @@
     "next": "14.0.4",
     "react": "^18",
     "react-dom": "^18",
+    "react-flatpickr": "^3.10.13",
     "react-icons": "^4.12.0",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
@@ -28,9 +29,11 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@hello-pangea/dnd": "^16.5.0",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/react-flatpickr": "^3.8.11",
     "@types/uuid": "^9.0.7",
     "autoprefixer": "^10.0.1",
     "daisyui": "^4.5.0",
