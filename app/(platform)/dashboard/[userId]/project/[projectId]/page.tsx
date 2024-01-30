@@ -29,7 +29,7 @@ const ProjectPage = async ({
         <div className={cn("text-2xl text-violet-900", headingFont.className)}>
           {projectName}
         </div>
-        <Modal project={projectName} />
+        <Modal project={projectName} isEditing={false} task={null} />
         <ModalProject
           isEditing={true}
           projectName={projectName}

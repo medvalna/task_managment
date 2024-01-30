@@ -58,7 +58,7 @@ export const editProject = async (
   const tasks = await getAllTodos(prevName);
   for (var i = 0; i < tasks.length; i++) {
     var task = tasks[i];
-    await editTodo(task.id, task.text, project.text, task.isDone);
+    await editTodo(task.id, task.text, project.text, task.isDone, task.date);
   }
   const res = await fetch(`${baseUrl}/projects/${projectId}`, {
     method: "PATCH",
