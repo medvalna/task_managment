@@ -11,6 +11,7 @@ import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
 import { ITask } from "@/types/tasks";
 import { FaEdit } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
@@ -59,6 +60,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
     setShowModal(false);
     router.refresh();
   };
+  
 
   const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -71,6 +73,20 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
         selectedDate
       );
     setShowModal(false);
+    router.refresh();
+  };
+  const handleClearDate: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    setSelectedDate(null)
+    if (task)
+      await editTodo(
+        task.id,
+        newTask,
+        task.project,
+        task.isDone,
+        selectedDate
+      );
+
     router.refresh();
   };
   return (
@@ -128,9 +144,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                     className=" text-slate-600 hover:text-black text-3xl"
                     onClick={() => setShowModal(false)}
                   >
-                    <span className=" text-2xl font-semibold h-5 w-5 block">
-                      x
-                    </span>
+                    <RxCross1 className=" text-2xl font-semibold h-5 w-5 block"/>
                   </button>
                 </div>
                 {/*body*/}
@@ -149,8 +163,9 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                       className="mb-5 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
                     />
                   </form>
+                  <form className="flex">
                   <Flatpickr
-                    //value={selectedDate!}
+                    value={selectedDate?selectedDate:""}
                     onChange={(date) => {
                       //console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
                       setSelectedDate(date[0]);
@@ -161,12 +176,15 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                       minDate: "today",
                       //altInput: true,
                       //altFormat: "F j, Y",
-                      defaultDate: new Date(selectedDate!),
+                      //defaultDate: new Date(selectedDate!),
                       dateFormat: "Y-m-d",
                       // You can customize the date picker options here
                     }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
                   />
+                   <RxCross1 className = "mt-2 ml-3 text-violet-900" cursor="pointer" size={25} onClick={handleClearDate} />
+                  </form>
+                 
                 </div>
                 {/*footer*/}
                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
