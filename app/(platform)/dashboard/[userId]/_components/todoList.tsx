@@ -20,7 +20,7 @@ const TodoList: React.FC<TodoListProps> = ({ tasks, project }) => {
         <div className="flex">
           <div className="w-3/4"></div>
           <div className="w-1/4">
-            <Modal project={project} />
+            <Modal project={project} isEditing={false} task={null} />
           </div>
         </div>
       </div>
