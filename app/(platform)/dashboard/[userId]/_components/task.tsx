@@ -85,7 +85,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
       </div>
 
       <div className="flex w-1/4 gap-2">
-        <Modal project="today" isEditing={true} task={task}/>
+        <Modal project = {task.project} isEditing={true} task={task}/>
         <FaRegTrashAlt className = "text-violet-950" cursor="pointer" size={25} onClick={handleDeleteTodo} />
       </div>
     </li>

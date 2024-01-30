@@ -37,9 +37,9 @@ export const SideBar = async () => {
             )}
             asChild
           >
-            <Link href={"/dashboard/" + userId + "/today/"}> Today</Link>
+            <Link href={"/dashboard/" + userId + "/inbox/"}>Inbox</Link>
           </Button>
-          <Modal project="today"/>
+          <Modal project="inbox" isEditing={false} task={null}/>
         </div>
         <ProjectDropDown projects = {projects} userId = {userId}/>
       </div>

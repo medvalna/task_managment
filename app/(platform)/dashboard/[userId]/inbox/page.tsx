@@ -10,16 +10,16 @@ const headingFont = Inter({
 });
 const DashboardPage = async () => {
 
-  const tasks = await getAllTodos("today");
+  const tasks = await getAllTodos("inbox");
   return (
     <div className=" bg-violet-50 h-screen w-screen">
       <div className="text-left my-5 mx-5 flex space-x-2">
         <div className={cn("text-2xl text-violet-900", headingFont.className)}>
-          Today
+          Inbox
         </div>
-        <Modal project="today" isEditing={false} task={null}/>
+        <Modal project="inbox" isEditing={false} task={null}/>
       </div>
-      <TodoList tasks={tasks} project="today"/>
+      <TodoList tasks={tasks} project="inbox"/>
     </div>
   );
 };
