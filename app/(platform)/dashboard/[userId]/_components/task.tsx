@@ -2,14 +2,12 @@
 import { cn } from "@/lib/utils";
 import { ITask } from "@/types/tasks";
 import { Inter } from "next/font/google";
-import { FaEdit } from "react-icons/fa";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { FormEventHandler, MouseEventHandler, useState } from "react";
+import { FormEventHandler} from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodo, editTodo } from "@/app/(api)/apiTasks";
-import Flatpickr from 'react-flatpickr';
 import 'flatpickr/dist/themes/material_green.css';
 import React from "react";
 import Modal from "./modal";
@@ -22,6 +20,19 @@ interface TasksProps {
   task: ITask;
 }
 const Task: React.FC<TasksProps> = ({ task }) => {
+  const editDateFormat = (date: Date): string => {
+    console.log("data:", date);
+    const line = date.toString().split("-");
+    const dateFin = line.slice(0, 3);
+    dateFin[2] = dateFin[2].slice(0,2);
+    console.log("datafin:", dateFin.join("/"));
+
+    const dateForm = new Date(dateFin.join("/"));
+    const newDate = new Date(dateForm.getTime() + 24 * 60 * 60 * 1000);
+    const formattedDate = newDate.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" });
+    console.log("dataForm:", formattedDate);
+    return formattedDate;
+  };
   const router = useRouter();
   const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
@@ -66,7 +77,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
             headingFont.className
           )}
         >
-          {task.date}
+          {editDateFormat(task.date!)}
         </div>
         </div>
         

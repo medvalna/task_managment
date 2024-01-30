@@ -17,7 +17,7 @@ const DashboardPage = async () => {
         <div className={cn("text-2xl text-violet-900", headingFont.className)}>
           Today
         </div>
-        <Modal project="today" isEditing = {false}/>
+        <Modal project="today" isEditing={false} task={null}/>
       </div>
       <TodoList tasks={tasks} project="today"/>
     </div>
