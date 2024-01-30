@@ -20,7 +20,8 @@ interface TasksProps {
   task: ITask;
 }
 const Task: React.FC<TasksProps> = ({ task }) => {
-  const editDateFormat = (date: Date): string => {
+  const editDateFormat = (date: Date | null): string => {
+    if (date==null || date == undefined){return "";}
     console.log("data:", date);
     const line = date.toString().split("-");
     const dateFin = line.slice(0, 3);
@@ -77,7 +78,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
             headingFont.className
           )}
         >
-          {editDateFormat(task.date!)}
+          {editDateFormat(task.date)}
         </div>
         </div>
         
