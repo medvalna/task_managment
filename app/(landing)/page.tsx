@@ -35,7 +35,7 @@ const LandingPage = () => {
           textFont.className
         )}
       >
-        We're excited to introduce <b>Task Manager</b>, the ultimate tool for
+        We&apos;re excited to introduce <b>Task Manager</b>, the ultimate tool for
         managing tasks and improving productivity. Manage your tasks
         efficiently, prioritize them effectively, and collaborate with your team
         seamlessly!
