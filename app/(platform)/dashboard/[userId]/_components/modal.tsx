@@ -4,29 +4,40 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { Inter } from "next/font/google";
-import { addTodo } from "@/app/(api)/apiTasks";
+import { addTodo, editTodo } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import Flatpickr from 'react-flatpickr';
-import 'flatpickr/dist/themes/material_green.css';
+import Flatpickr from "react-flatpickr";
+import "flatpickr/dist/themes/airbnb.css";
+import { ITask } from "@/types/tasks";
+import { FaEdit } from "react-icons/fa";
 const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });
 interface ModalProps {
   project: string;
+  isEditing: boolean;
+  task: ITask | null;
 }
-const Modal: React.FC<ModalProps> = ({ project }) => {
-  
+const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const router = useRouter();
-  const [selectedDate, setSelectedDate] = useState<string>("" );
+  const now = new Date();
+  const editDateFormat = (date: string): string => {
+    const line = date.split(" ");
+    const dateFin = line.slice(1, 4);
+    return dateFin.join(" ");
+  };
+  const [selectedDate, setSelectedDate] = useState<string>(
+    task ? task.date : editDateFormat(now.toUTCString())
+  );
   const [showModal, setShowModal] = React.useState(false);
-  const [newTask, setnewTask] = useState<string>("");
+  const [newTask, setnewTask] = useState<string>(task ? task.text : "");
+
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    const date = selectedDate.split(' ');;
-    const dateFin = date.slice(1, 4);
-    await addTodo(uuidv4(), newTask, project, dateFin.join(' '));
+    console.log(selectedDate);
+    await addTodo(uuidv4(), newTask, project, editDateFormat(selectedDate));
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -34,27 +45,61 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    const date = selectedDate.split(' ');;
-    const dateFin = date.slice(1, 4);
-    await addTodo(uuidv4(), newTask, project, dateFin.join(' '));
+    await addTodo(uuidv4(), newTask, project, editDateFormat(selectedDate));
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
     router.refresh();
   };
+  const handleEditButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
+    e.preventDefault();
+    if (task)
+      await editTodo(
+        task.id,
+        newTask,
+        task.project,
+        task.isDone,
+        editDateFormat(selectedDate)
+      );
+    setShowModal(false);
+    router.refresh();
+  };
+
+  const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
+    e.preventDefault();
+    if (task)
+      await editTodo(
+        task.id,
+        newTask,
+        task.project,
+        task.isDone,
+        editDateFormat(selectedDate)
+      );
+    setShowModal(false);
+    router.refresh();
+  };
   return (
     <>
-      <Button
-        variant="outline"
-        className={cn(
-          " px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
-          headingFont.className
-        )}
-        asChild
-        onClick={() => setShowModal(true)}
-      >
-        <Plus className="text-violet-950" />
-      </Button>
+      {isEditing ? (
+        <FaEdit
+          className="text-violet-950"
+          cursor="pointer"
+          size={25}
+          onClick={() => setShowModal(true)}
+        />
+      ) : (
+        <Button
+          variant="outline"
+          className={cn(
+            " px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+            headingFont.className
+          )}
+          asChild
+          onClick={() => setShowModal(true)}
+        >
+          <Plus className="text-violet-950" />
+        </Button>
+      )}
       {showModal ? (
         <>
           <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
@@ -69,7 +114,25 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
                       headingFont.className
                     )}
                   >
-                    Add new task
+                    {isEditing ? (
+                      <h3
+                        className={cn(
+                          "text-2xl font-semibold",
+                          headingFont.className
+                        )}
+                      >
+                        Edit Task
+                      </h3>
+                    ) : (
+                      <h3
+                        className={cn(
+                          "text-2xl font-semibold",
+                          headingFont.className
+                        )}
+                      >
+                        Add New Task
+                      </h3>
+                    )}
                   </h3>
                   <button
                     className=" text-slate-600 hover:text-black text-3xl"
@@ -82,7 +145,11 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
                 </div>
                 {/*body*/}
                 <div className="relative p-6 flex-auto">
-                  <form onSubmit={handleSubmitNewTodo}>
+                  <form
+                    onSubmit={
+                      isEditing ? handleSubmitEditTodo : handleSubmitNewTodo
+                    }
+                  >
                     <input
                       autoFocus
                       value={newTask}
@@ -94,10 +161,11 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
                   </form>
                   <Flatpickr
                     value={selectedDate}
-                    onChange={(date) => setSelectedDate(date[0].toString())}
+                    onChange={(date) => setSelectedDate(date.toString())}
                     placeholder="Choose Date"
                     options={{
-                      dateFormat: 'Y-m-d',
+                      minDate: "today",
+                      dateFormat: "Y-m-d",
                       // You can customize the date picker options here
                     }}
                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
@@ -114,7 +182,7 @@ const Modal: React.FC<ModalProps> = ({ project }) => {
                   </button>
                   <button
                     className="bg-violet-500 text-white hover:bg-violet-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    onClick={handleSaveButton}
+                    onClick={isEditing ? handleEditButton : handleSaveButton}
                   >
                     Save Changes
                   </button>
