@@ -24,7 +24,7 @@ export const addTodo = async (
   todoId: string,
   text: string,
   project: string, 
-  date: string,
+  date: Date | null,
 ): Promise<ITask> => {
   const userId = await getUserId();
 
@@ -71,7 +71,7 @@ export const editTodo = async (
   newTask: string,
   project: string,
   isDone: boolean,
-  date: string,
+  date: Date | null,
 ): Promise<void> => {
   const userId = await getUserId();
   const todo: ITask = {

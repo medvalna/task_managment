@@ -4,5 +4,5 @@ export interface ITask {
     userId: string,
     project: string,
     isDone: boolean,
-    date: string
+    date: Date | null,
 }
