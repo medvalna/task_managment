@@ -22,14 +22,9 @@ interface ModalProps {
 }
 const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const router = useRouter();
-  const now = new Date();
-  const editDateFormat = (date: string): string => {
-    const line = date.split(" ");
-    const dateFin = line.slice(1, 4);
-    return dateFin.join(" ");
-  };
-  const [selectedDate, setSelectedDate] = useState<string>(
-    task ? task.date : editDateFormat(now.toUTCString())
+  //const now = new Date();editDateFormat(now.toUTCString())
+  const [selectedDate, setSelectedDate] = useState<Date | null>(
+    task ? task.date : null
   );
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setnewTask] = useState<string>(task ? task.text : "");
@@ -37,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     console.log(selectedDate);
-    await addTodo(uuidv4(), newTask, project, editDateFormat(selectedDate));
+    await addTodo(uuidv4(), newTask, project, selectedDate);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -45,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, project, editDateFormat(selectedDate));
+    await addTodo(uuidv4(), newTask, project, selectedDate);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -59,7 +54,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
         newTask,
         task.project,
         task.isDone,
-        editDateFormat(selectedDate)
+        selectedDate
       );
     setShowModal(false);
     router.refresh();
@@ -73,7 +68,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
         newTask,
         task.project,
         task.isDone,
-        editDateFormat(selectedDate)
+        selectedDate
       );
     setShowModal(false);
     router.refresh();
@@ -108,12 +103,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
               <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
                 {/*header*/}
                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                  <h3
-                    className={cn(
-                      "text-3xl font-semibold",
-                      headingFont.className
-                    )}
-                  >
+                  < >
                     {isEditing ? (
                       <h3
                         className={cn(
@@ -133,7 +123,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                         Add New Task
                       </h3>
                     )}
-                  </h3>
+                  </>
                   <button
                     className=" text-slate-600 hover:text-black text-3xl"
                     onClick={() => setShowModal(false)}
@@ -160,11 +150,18 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                     />
                   </form>
                   <Flatpickr
-                    value={selectedDate}
-                    onChange={(date) => setSelectedDate(date.toString())}
-                    placeholder="Choose Date"
+                    //value={selectedDate!}
+                    onChange={(date) => {
+                      //console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
+                      setSelectedDate(date[0]);
+                      console.log("choosen date:", date[0]);
+                    }}
+                    placeholder={"Choose Date"}
                     options={{
                       minDate: "today",
+                      //altInput: true,
+                      //altFormat: "F j, Y",
+                      defaultDate: new Date(selectedDate!),
                       dateFormat: "Y-m-d",
                       // You can customize the date picker options here
                     }}
