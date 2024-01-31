@@ -17,4 +17,5 @@ Application for task managment
 - sign-in page
 - sign-up page
 - page for todays tasks
+- page for inbox tasks
 - custom project pages
