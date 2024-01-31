@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { Inter } from "next/font/google";
-import { addTodo, editTodo } from "@/app/(api)/apiTasks";
+import { addTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import Flatpickr from "react-flatpickr";
@@ -33,7 +33,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     console.log(selectedDate);
-    await addTodo(uuidv4(), newTask, project, selectedDate);
+    await addTodoPrisma(uuidv4(), newTask, project, selectedDate);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodo(uuidv4(), newTask, project, selectedDate);
+    await addTodoPrisma(uuidv4(), newTask, project, selectedDate);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -50,12 +50,12 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const handleEditButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
     if (task)
-      await editTodo(
+      await editTodoPrisma(
         task.id,
         newTask,
         task.project,
         task.isDone,
-        selectedDate
+        selectedDate,
       );
     setShowModal(false);
     router.refresh();
@@ -65,7 +65,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
     if (task)
-      await editTodo(
+      await editTodoPrisma(
         task.id,
         newTask,
         task.project,
@@ -79,7 +79,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
     e.preventDefault();
     setSelectedDate(null)
     if (task)
-      await editTodo(
+      await editTodoPrisma(
         task.id,
         newTask,
         task.project,

@@ -1,4 +1,4 @@
-import { getAllTodos } from "@/app/(api)/apiTasks";
+import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 import Modal from "../../_components/modal";
 import TodoList from "../../_components/todoList";
 import { Inter } from "next/font/google";
@@ -21,7 +21,7 @@ const ProjectPage = async ({
   const projectName = searchParams["name"] ?? "";
   const projectId = searchParams["id"] ?? "";
   const userId =await getUserId();
-  const tasks = await getAllTodos(`${projectName}`);
+  const tasks = await getAllTodosPrisma(`${projectName}`);
  
   return (
     <div className=" bg-violet-50 h-screen w-screen">

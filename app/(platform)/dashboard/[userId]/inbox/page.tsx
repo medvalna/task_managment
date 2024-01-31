@@ -2,7 +2,7 @@ import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
-import { getAllTodos } from "@/app/(api)/apiTasks";
+import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 
 const headingFont = Inter({
   subsets: ["latin"],
@@ -10,7 +10,7 @@ const headingFont = Inter({
 });
 const DashboardPage = async () => {
 
-  const tasks = await getAllTodos("inbox");
+  const tasks = await getAllTodosPrisma("inbox");
   return (
     <div className=" bg-violet-50 h-screen w-screen">
       <div className="text-left my-5 mx-5 flex space-x-2">

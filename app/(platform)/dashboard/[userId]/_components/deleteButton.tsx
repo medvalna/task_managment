@@ -1,5 +1,5 @@
 'use client'
-import { deleteProject } from "@/app/(api)/apiProjects";
+import { deleteProjectPrisma } from "@/app/(api)/apiProjects";
 import { MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -14,7 +14,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({ projectId,projectName}) => 
       ) => {
         e.preventDefault();
         router.push('/')
-        await deleteProject(projectId, projectName);
+        await deleteProjectPrisma(projectId, projectName);
         router.refresh();
       };
     return(<FaRegTrashAlt className = "rounded-lg hover:bg-violet-300 text-violet-950 py-3 w-10 h-10" onClick={handleDeleteProjButton} />);

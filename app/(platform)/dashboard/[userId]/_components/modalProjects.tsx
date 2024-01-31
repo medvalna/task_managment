@@ -6,7 +6,7 @@ import { Plus } from "lucide-react";
 import { Inter } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
-import { addProject, editProject } from "@/app/(api)/apiProjects";
+import { addProjectPrisma, editProjectPrisma } from "@/app/(api)/apiProjects";
 import { FaPen } from "react-icons/fa";
 const headingFont = Inter({
   subsets: ["latin"],
@@ -26,7 +26,8 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await addProject(uuidv4(), newProject);
+    //await addProject(uuidv4(), newProject);
+    await addProjectPrisma(uuidv4(), newProject);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
@@ -35,7 +36,8 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await addProject(uuidv4(), newProject);
+    //await addProject(uuidv4(), newProject);
+    await addProjectPrisma(uuidv4(), newProject);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
@@ -45,7 +47,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await editProject(projectId, newProject, projectName);
+    await editProjectPrisma(projectId, newProject, projectName);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);
@@ -56,7 +58,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({ isEditing, projectName, pro
     e
   ) => {
     e.preventDefault();
-    await editProject(projectId, newProject, projectName);
+    await editProjectPrisma(projectId, newProject, projectName);
     setnewProject("");
     //TODO: decide if we want to close modal after entering the task
     setShowModal(false);

@@ -7,7 +7,7 @@ import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FormEventHandler} from "react";
 import { useRouter } from "next/navigation";
-import { deleteTodo, editTodo } from "@/app/(api)/apiTasks";
+import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import 'flatpickr/dist/themes/material_green.css';
 import React from "react";
 import Modal from "./modal";
@@ -20,29 +20,30 @@ interface TasksProps {
   task: ITask;
 }
 const Task: React.FC<TasksProps> = ({ task }) => {
-  const editDateFormat = (date: Date | null): string => {
-    if (date==null || date == undefined){return "";}
+  const editDateFormat = (date: Date | null | string): string => {
+    if (date==null || date == undefined || date == ""){return "";}
     console.log("data:", date);
     const line = date.toString().split("-");
     const dateFin = line.slice(0, 3);
-    dateFin[2] = dateFin[2].slice(0,2);
+    dateFin[2] = dateFin[2]?.slice(0,2);
     console.log("datafin:", dateFin.join("/"));
 
     const dateForm = new Date(dateFin.join("/"));
+    const formattedDate = dateForm.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" });
     console.log("dataForm:", formattedDate);
     return formattedDate;
   };
   const router = useRouter();
   const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await deleteTodo(task.id);
+    await deleteTodoPrisma(task.id);
 
     router.refresh();
   };
-  const handleDoneTodo: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleDoneTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
 
-    editTodo(task.id, task.text, task.project, !task.isDone, task.date);
+    await editTodoPrisma(task.id, task.text, task.project, !task.isDone, task.date);
     router.refresh();
   };
 

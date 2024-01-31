@@ -7,9 +7,8 @@ import Link from "next/link";
 import { getUserId } from "@/app/(api)/apiUser";
 import { UserButton } from "@clerk/nextjs";
 import Modal from "./modal";
-import { getAllProjects } from "@/app/(api)/apiProjects";
 import { ProjectDropDown } from "./projectDropDown";
-
+import { getAllProjectsPrisma } from "@/app/(api)/apiProjects";
 const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
@@ -17,8 +16,7 @@ const headingFont = Inter({
 
 export const SideBar = async () => {
   const userId = await getUserId();
-  const projects = await getAllProjects();
- 
+  const projects = await getAllProjectsPrisma();
 
   return (
     <>
