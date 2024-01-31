@@ -17,7 +17,7 @@ const TodayPage = async () => {
   const projectName = "today";
   const projectId = "123";
   const userId =await getUserId();
-  const tasks = await getAllTodaysTodosPrisma(`today`);
+  const tasks = await getAllTodaysTodosPrisma();
  
   return (
     <div className=" bg-violet-50 h-screen w-screen">
@@ -35,7 +35,7 @@ const TodayPage = async () => {
         <DeleteButton projectId={projectId} projectName={projectName}/>
         
       </div>
-      <TodoList tasks={tasks} project={projectName} />
+      <TodoList tasks={tasks} project={"inbox"} />
     </div>
   );
 };

@@ -15,11 +15,10 @@ export const getAllTodosPrisma = async (project: string) => {
 
   return tasks;
 };
-export const getAllTodaysTodosPrisma = async (project: string) => {
+export const getAllTodaysTodosPrisma = async () => {
   const userId = await getUserId();
   let now = new Date();
   let today= now.toUTCString().split(" ").slice(0,4).join(" ");
-  console.log("today:", today);
   const tasks = await prisma.task.findMany({
     where: {
       userId: userId,
