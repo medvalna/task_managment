@@ -1,49 +1,44 @@
 "use server";
 import { IProject } from "@/types/projects";
 import { getUserId } from "./apiUser";
-import { deleteTodo, editTodo, getAllTodos } from "./apiTasks";
-
-const baseUrl = process.env.DB_HOST;
-
-export const getAllProjects = async (): Promise<IProject[]> => {
+import prisma from "@/lib/prisma";
+export const getAllProjectsPrisma = async () => {
   const userId = await getUserId();
-  const res = await fetch(`${baseUrl}/projects?userId=${userId}`, {
-    cache: "no-store",
+  const projects = await prisma.project.findMany({
+    where: {
+      userId: userId,
+    },
   });
-  if (!res.ok) {
-    console.log("Failed to get projects");
+  if (!projects.ok) {
+    console.log("Failed to get projects from prisma");
   }
 
-  const todos = await res.json();
-
-  return todos;
+  //const projects = await res.json();
+  console.log("prizma projects", projects);
+  return projects;
 };
 
-export const addProject = async (
+export const addProjectPrisma = async (
   projectId: string,
   text: string
 ): Promise<IProject> => {
   const userId = await getUserId();
-  const project: IProject = {
-    id: projectId,
-    text: text,
-    userId: userId,
-  };
-  const res = await fetch(`${baseUrl}/projects`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
+  const res = await prisma.project.create({
+    data: {
+      id: projectId,
+      text: text,
+      userId: userId,
     },
-    body: JSON.stringify(project),
   });
+  //res.json(res);
   if (!res.ok) {
-    throw new Error("Failed to add project");
+    console.log("Failed to add project to prisma");
   }
-  const newProject = await res.json();
+  const newProject = await res;
   return newProject;
 };
 
-export const editProject = async (
+export const editProjectPrisma = async (
   projectId: string,
   text: string,
   prevName: string
@@ -55,43 +50,37 @@ export const editProject = async (
     userId: userId,
   };
   console.log(project);
-  const tasks = await getAllTodos(prevName);
-  for (var i = 0; i < tasks.length; i++) {
-    var task = tasks[i];
-    await editTodo(task.id, task.text, project.text, task.isDone, task.date);
-  }
-  const res = await fetch(`${baseUrl}/projects/${projectId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-type": "application/json",
+  await prisma.task.updateMany({
+    where: {
+      project: prevName,
     },
-    body: JSON.stringify(project),
+    data: {
+      project: text,
+    },
   });
 
-  if (!res.ok) {
-    console.log(res.status);
-    throw new Error("Failed to edit project");
-  }
+  await prisma.project.update({
+    where: {
+      id: projectId,
+    },
+    data: {
+      text: text,
+    },
+  });
 };
 
-export const deleteProject = async (
+export const deleteProjectPrisma = async (
   projectId: string,
-  prevName: string
+  projName: string
 ): Promise<void> => {
-  const tasks = await getAllTodos(prevName);
-  for (var i = 0; i < tasks.length; i++) {
-    var task = tasks[i];
-    await deleteTodo(task.id);
-  }
-  const res = await fetch(`${baseUrl}/projects/${projectId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
+  await prisma.task.deleteMany({
+    where: {
+      project: projName,
     },
   });
-
-  if (!res.ok) {
-    console.log(res.status);
-    throw new Error("Failed to delete project");
-  }
+  await prisma.project.delete({
+    where: {
+      id: projectId,
+    },
+  });
 };
