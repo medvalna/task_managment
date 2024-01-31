@@ -8,6 +8,8 @@ Application for task managment
 - next.js
 - clerk
 - tailwind.css
+- prisma
+- vercel
 
 ### Pages:
 
