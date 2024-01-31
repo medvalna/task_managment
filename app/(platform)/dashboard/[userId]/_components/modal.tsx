@@ -24,16 +24,23 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   const router = useRouter();
   //const now = new Date();editDateFormat(now.toUTCString())
-  const [selectedDate, setSelectedDate] = useState<Date | null>(
-    task ? task.date : null
+  const [selectedDate, setSelectedDate] = useState<Date| string | null>(
+    task ? task.date : ""
   );
   const [showModal, setShowModal] = React.useState(false);
   const [newTask, setnewTask] = useState<string>(task ? task.text : "");
-
+const dataFormatting = (data: string) => {
+  const line = new Date(data);
+  const newDate = new Date(line.getTime() + 2*24 * 60 * 60 * 1000);
+  const formattedDate = newDate.toUTCString().split(" ").slice(0,4).join(" ");
+  return formattedDate;
+}
   const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
-    console.log(selectedDate);
-    await addTodoPrisma(uuidv4(), newTask, project, selectedDate);
+    
+    const data = selectedDate? dataFormatting(selectedDate.toString()) : selectedDate;
+    await addTodoPrisma(uuidv4(), newTask, project, data);
+    console.log("sel date:", data);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -41,7 +48,10 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   };
   const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
-    await addTodoPrisma(uuidv4(), newTask, project, selectedDate);
+    
+    const data = selectedDate? dataFormatting(selectedDate.toString()) : selectedDate;
+    await addTodoPrisma(uuidv4(), newTask, project, data);
+    console.log("sel date:", data);
     setnewTask("");
     //TODO: decide if we want to close modal after entering the task
     //setShowModal(false);
@@ -49,13 +59,16 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
   };
   const handleEditButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
     e.preventDefault();
+   
+    const data = selectedDate? dataFormatting(selectedDate.toString()) : selectedDate;
+    console.log("sel date:", data);
     if (task)
       await editTodoPrisma(
         task.id,
         newTask,
         task.project,
         task.isDone,
-        selectedDate,
+        data,
       );
     setShowModal(false);
     router.refresh();
@@ -64,13 +77,16 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 
   const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
     e.preventDefault();
+    
+    const data = selectedDate? dataFormatting(selectedDate.toString()) : selectedDate;
+    console.log("sel date:", data);
     if (task)
       await editTodoPrisma(
         task.id,
         newTask,
         task.project,
         task.isDone,
-        selectedDate
+        data,
       );
     setShowModal(false);
     router.refresh();
@@ -165,15 +181,16 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
                   </form>
                   <form className="flex">
                   <Flatpickr
-                    value={selectedDate?selectedDate:""}
+                    value={selectedDate?new Date(selectedDate):""}
                     onChange={(date) => {
                       //console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
-                      setSelectedDate(date[0]);
+                      setSelectedDate(date[0].toUTCString().split(" ").slice(0,4).join(" "));
                       console.log("choosen date:", date[0]);
                     }}
                     placeholder={"Choose Date"}
                     options={{
                       minDate: "today",
+                      enableTime: false,
                       //altInput: true,
                       //altFormat: "F j, Y",
                       //defaultDate: new Date(selectedDate!),
