@@ -3,7 +3,7 @@ import { IProject } from "@/types/projects";
 import { getUserId } from "./apiUser";
 import { deleteTodo, editTodo, getAllTodos } from "./apiTasks";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.DB_HOST;
 
 export const getAllProjects = async (): Promise<IProject[]> => {
   const userId = await getUserId();

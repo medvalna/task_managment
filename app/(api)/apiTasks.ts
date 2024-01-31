@@ -1,7 +1,7 @@
 "use server";
 import { ITask } from "../../types/tasks";
 import { getUserId } from "./apiUser";
-const baseUrl = "http://localhost:3001";
+const baseUrl = process.env.DB_HOST;
 
 export const getAllTodos = async (project: string): Promise<ITask[]> => {
   const userId = await getUserId();
