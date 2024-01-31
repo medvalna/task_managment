@@ -9,12 +9,7 @@ export const getAllProjectsPrisma = async () => {
       userId: userId,
     },
   });
-  if (!projects.ok) {
-    console.log("Failed to get projects from prisma");
-  }
 
-  //const projects = await res.json();
-  console.log("prizma projects", projects);
   return projects;
 };
 
@@ -30,10 +25,6 @@ export const addProjectPrisma = async (
       userId: userId,
     },
   });
-  //res.json(res);
-  if (!res.ok) {
-    console.log("Failed to add project to prisma");
-  }
   const newProject = await res;
   return newProject;
 };

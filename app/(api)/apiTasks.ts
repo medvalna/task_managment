@@ -13,8 +13,6 @@ export const getAllTodosPrisma = async (project: string) => {
     },
   });
 
-  console.log("prisma tasks", tasks);
-
   return tasks;
 };
 
@@ -22,7 +20,7 @@ export const addTodoPrisma = async (
   todoId: string,
   text: string,
   project: string,
-  date: Date | null
+  date: Date | null | String
 ): Promise<ITask> => {
   const userId = await getUserId();
   const res = await prisma.task.create({
@@ -45,8 +43,6 @@ export const deleteTodoPrisma = async (taskId: string): Promise<void> => {
       id: taskId,
     },
   });
-
-  console.log("Task deleted successfully");
 };
 
 export const editTodoPrisma = async (
@@ -54,7 +50,7 @@ export const editTodoPrisma = async (
   newTask: string,
   project: string,
   isDone: boolean,
-  date: Date | null
+  date: Date | null | String
 ): Promise<void> => {
   let dateP;
   if (date != null) {
@@ -74,6 +70,4 @@ export const editTodoPrisma = async (
       project: project,
     },
   });
-
-  console.log("Task updated in prisma successfully");
 };
