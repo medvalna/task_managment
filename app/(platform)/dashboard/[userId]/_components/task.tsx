@@ -29,8 +29,6 @@ const Task: React.FC<TasksProps> = ({ task }) => {
     console.log("datafin:", dateFin.join("/"));
 
     const dateForm = new Date(dateFin.join("/"));
-    const newDate = new Date(dateForm.getTime() + 24 * 60 * 60 * 1000);
-    const formattedDate = newDate.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" });
     console.log("dataForm:", formattedDate);
     return formattedDate;
   };
