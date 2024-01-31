@@ -1,98 +1,79 @@
 "use server";
 import { ITask } from "../../types/tasks";
 import { getUserId } from "./apiUser";
-const baseUrl = process.env.DB_HOST;
 
-export const getAllTodos = async (project: string): Promise<ITask[]> => {
+import prisma from "@/lib/prisma";
+
+export const getAllTodosPrisma = async (project: string) => {
   const userId = await getUserId();
-  const res = await fetch(
-    `${baseUrl}/tasks?userId=${userId}&project=${project}`,
-    {
-      cache: "no-store",
-    }
-  );
-  if (!res.ok) {
-    console.log("Failed to get tasks");
-  }
+  const tasks = await prisma.task.findMany({
+    where: {
+      project: project,
+      userId: userId,
+    },
+  });
 
-  const todos = await res.json();
+  console.log("prisma tasks", tasks);
 
-  return todos;
+  return tasks;
 };
 
-export const addTodo = async (
+export const addTodoPrisma = async (
   todoId: string,
   text: string,
-  project: string, 
-  date: Date | null,
+  project: string,
+  date: Date | null
 ): Promise<ITask> => {
   const userId = await getUserId();
-
-  const todo: ITask = {
-    id: todoId,
-    text: text,
-    userId: userId,
-    project: project,
-    isDone: false,
-    date: date,
-
-  };
-  const res = await fetch(`${baseUrl}/tasks?userId=${userId}`, {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json",
+  const res = await prisma.task.create({
+    data: {
+      id: todoId,
+      text: text,
+      userId: userId,
+      project: project,
+      isDone: false,
+      date: date?.toString(),
     },
-    body: JSON.stringify(todo),
   });
-  if (!res.ok) {
-    throw new Error("Failed to add task");
-  }
-  const newTodo = await res.json();
+  const newTodo = await res;
   return newTodo;
 };
 
-export const deleteTodo = async (taskId: string): Promise<void> => {
-  const response = await fetch(`${baseUrl}/tasks/${taskId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
+export const deleteTodoPrisma = async (taskId: string): Promise<void> => {
+  await prisma.task.delete({
+    where: {
+      id: taskId,
     },
   });
-
-  if (!response.ok) {
-    throw new Error("Failed to delete task");
-  }
 
   console.log("Task deleted successfully");
 };
 
-export const editTodo = async (
+export const editTodoPrisma = async (
   todoId: string,
   newTask: string,
   project: string,
   isDone: boolean,
-  date: Date | null,
+  date: Date | null
 ): Promise<void> => {
-  const userId = await getUserId();
-  const todo: ITask = {
-    id: todoId,
-    text: newTask,
-    userId: userId,
-    project: project,
-    isDone: isDone,
-    date: date,
-  };
-  const response = await fetch(`${baseUrl}/tasks/${todo.id}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todo),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to update task");
+  let dateP;
+  if (date != null) {
+    dateP = date.toString();
+  } else {
+    dateP = date;
   }
 
-  console.log("Task updated successfully");
+  await prisma.task.update({
+    where: {
+      id: todoId,
+    },
+    data: {
+      text: newTask,
+      isDone: isDone,
+      date: dateP,
+      project: project,
+    },
+  });
+
+  console.log("Task updated in prisma successfully");
 };
