@@ -8,7 +8,7 @@ const headingFont = Inter({
   subsets: ["latin"],
   weight: ["400"],
 });
-const DashboardPage = async () => {
+const InboxPage = async () => {
 
   const tasks = await getAllTodosPrisma("inbox");
   return (
@@ -24,4 +24,4 @@ const DashboardPage = async () => {
   );
 };
 
-export default DashboardPage;
+export default InboxPage;
