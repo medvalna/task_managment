@@ -8,55 +8,55 @@ import ModalProject from "./modalProjects";
 import ProjectList from "./projectList";
 import { IoMdArrowDropdown } from "react-icons/io";
 const headingFont = Inter({
-  subsets: ["latin"],
-  weight: ["400"],
+	subsets: ["latin"],
+	weight: ["400"],
 });
 
 interface ProjectDropDownProps {
-  projects: IProject[];
-  userId: string;
+	projects: IProject[];
+	userId: string;
 }
 
 export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
-  projects,
-  userId
+	projects,
+	userId,
 }) => {
-  const [isOpen, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen(!isOpen);
-  };
-  
-  return (
-    <>
-      <div className="flex items-center justify-between w-full mr-2">
-        <Button
-          variant="outline"
-          className={cn(
-            " pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300",
-            headingFont.className
-          )}
-          onClick={handleOpen}
-        >
-          <div className="flex justify-between w-full text-violet-900">
-            Project
-            <span className = "hover:text-violet-700">
-              <IoMdArrowDropdown className = "w-5 h-5 mt-1 mr-2"/>
-            </span>
-          </div>
-        </Button>
+	const [isOpen, setOpen] = useState(false);
+	const handleOpen = () => {
+		setOpen(!isOpen);
+	};
 
-        <ModalProject isEditing = {false} projectName="" projectId="" userId=""/>
-      </div>
-      {isOpen && (
-        <div
-          className={cn(
-            "flex items-center space-x-4 md:w-auto justify-between w-full",
-            headingFont.className
-          )}
-        >
-          <ProjectList projects={projects} userId = {userId} />
-        </div>
-      )}
-    </>
-  );
+	return (
+		<>
+			<div className="flex items-center justify-between w-full mr-2">
+				<Button
+					variant="outline"
+					className={cn(
+						" pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300",
+						headingFont.className,
+					)}
+					onClick={handleOpen}
+				>
+					<div className="flex justify-between w-full text-violet-900">
+						Project
+						<span className="hover:text-violet-700">
+							<IoMdArrowDropdown className="w-5 h-5 mt-1 mr-2" />
+						</span>
+					</div>
+				</Button>
+
+				<ModalProject isEditing={false} projectName="" projectId="" userId="" />
+			</div>
+			{isOpen && (
+				<div
+					className={cn(
+						"flex items-center space-x-4 md:w-auto justify-between w-full",
+						headingFont.className,
+					)}
+				>
+					<ProjectList projects={projects} userId={userId} />
+				</div>
+			)}
+		</>
+	);
 };

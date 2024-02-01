@@ -5,23 +5,22 @@ import TodoList from "../_components/todoList";
 import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 
 const headingFont = Inter({
-  subsets: ["latin"],
-  weight: ["400"],
+	subsets: ["latin"],
+	weight: ["400"],
 });
 const InboxPage = async () => {
-
-  const tasks = await getAllTodosPrisma("inbox");
-  return (
-    <div className=" bg-violet-50 h-screen w-screen">
-      <div className="text-left my-5 mx-5 flex space-x-2">
-        <div className={cn("text-2xl text-violet-900", headingFont.className)}>
-          Inbox
-        </div>
-        <Modal project="inbox" isEditing={false} task={null}/>
-      </div>
-      <TodoList tasks={tasks} project="inbox"/>
-    </div>
-  );
+	const tasks = await getAllTodosPrisma("inbox");
+	return (
+		<div className=" bg-violet-50 h-screen w-screen">
+			<div className="text-left my-5 mx-5 flex space-x-2">
+				<div className={cn("text-2xl text-violet-900", headingFont.className)}>
+					Inbox
+				</div>
+				<Modal project="inbox" isEditing={false} task={null} />
+			</div>
+			<TodoList tasks={tasks} project="inbox" />
+		</div>
+	);
 };
 
 export default InboxPage;
