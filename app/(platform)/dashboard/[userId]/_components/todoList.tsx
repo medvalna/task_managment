@@ -1,6 +1,5 @@
 import { ITask } from "@/types/tasks";
 import Task from "./task";
-import Modal from "./modal";
 
 interface TodoListProps {
 	tasks: ITask[];

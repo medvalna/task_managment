@@ -1,7 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { ITask } from "@/types/tasks";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -11,7 +11,7 @@ import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import "flatpickr/dist/themes/material_green.css";
 import React from "react";
 import Modal from "./modal";
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -63,23 +63,23 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 			<div className="flex w-3/4">
 				{task.isDone ? (
 					<MdCheckBox
-						className="text-violet-950"
+						className="text-black"
 						cursor="pointer"
 						size={25}
 						onClick={handleDoneTodo}
 					/>
 				) : (
 					<MdCheckBoxOutlineBlank
-						className="text-violet-950"
+						className="text-black"
 						cursor="pointer"
 						size={25}
 						onClick={handleDoneTodo}
 					/>
 				)}
-				<div className="grid grid-cols-1 text-violet-900">
+				<div className="grid grid-cols-1 text-black">
 					<div
 						className={cn(
-							task.isDone ? "text-violet-900 line-through" : "text-violet-900",
+							task.isDone ? "text-black line-through" : "text-black",
 							"row-span-1 text-left pl-5 pr-10 text-xl",
 							headingFont.className,
 						)}
@@ -89,7 +89,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 					{task.date ? (
 						<div
 							className={cn(
-								"flex row-span-2 text-left pl-5 pr-10 text-violet-900 text-sm",
+								"flex row-span-2 text-left pl-5 pr-10 text-black text-sm",
 								headingFont.className,
 							)}
 						>
@@ -99,7 +99,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 
 					<div
 						className={cn(
-							"flex row-span-2 text-left pl-5 pr-10 text-violet-900 text-sm",
+							"flex row-span-2 text-left pl-5 pr-10 text-black text-sm",
 							headingFont.className,
 						)}
 					>
@@ -111,7 +111,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 			<div className="flex w-1/4 gap-2">
 				<Modal project={task.project} isEditing={true} task={task} />
 				<FaRegTrashAlt
-					className="text-violet-950"
+					className="text-black"
 					cursor="pointer"
 					size={25}
 					onClick={handleDeleteTodo}

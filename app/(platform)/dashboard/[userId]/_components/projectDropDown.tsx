@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { IProject } from "@/types/projects";
 import { useState } from "react";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import ModalProject from "./modalProjects";
 import ProjectList from "./projectList";
 import { IoMdArrowDropdown } from "react-icons/io";
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -32,12 +32,12 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
 				<Button
 					variant="outline"
 					className={cn(
-						" pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300",
+						" pl-2 block h-full w-full rounded-sm text-lg text-black hover:bg-violet-200 focus:bg-violet-300",
 						headingFont.className,
 					)}
 					onClick={handleOpen}
 				>
-					<div className="flex justify-between w-full text-violet-900">
+					<div className="flex justify-between w-full text-black">
 						Project
 						<span className="hover:text-violet-700">
 							<IoMdArrowDropdown className="w-5 h-5 mt-1 mr-2" />

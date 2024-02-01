@@ -3,7 +3,7 @@ import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { addTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
@@ -13,7 +13,7 @@ import { ITask } from "@/types/tasks";
 import { FaEdit } from "react-icons/fa";
 import { RxCross1 } from "react-icons/rx";
 
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -135,7 +135,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 		<>
 			{isEditing ? (
 				<FaEdit
-					className="text-violet-950"
+					className="text-black"
 					cursor="pointer"
 					size={25}
 					onClick={() => setShowModal(true)}
@@ -144,13 +144,13 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 				<Button
 					variant="outline"
 					className={cn(
-						" px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+						" px-2 py-2 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
 						headingFont.className,
 					)}
 					asChild
 					onClick={() => setShowModal(true)}
 				>
-					<Plus className="text-violet-950" />
+					<Plus className="text-black" />
 				</Button>
 			)}
 			{showModal ? (
@@ -232,7 +232,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
 										/>
 										<RxCross1
-											className="mt-2 ml-3 text-violet-900"
+											className="mt-2 ml-3 text-black"
 											cursor="pointer"
 											size={25}
 											onClick={handleClearDate}

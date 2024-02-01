@@ -1,10 +1,10 @@
 import { IProject } from "@/types/projects";
 import { cn } from "@/lib/utils";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import React from "react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -22,7 +22,7 @@ const Project: React.FC<ProjectsProps> = ({ project, userId }) => {
 			<Button
 				asChild
 				className={cn(
-					"pl-2 block h-full w-full rounded-sm text-lg text-violet-950 hover:bg-violet-200 focus:bg-violet-300",
+					"pl-2 block h-full w-full rounded-sm text-lg text-black hover:bg-violet-200 focus:bg-violet-300",
 					headingFont.className,
 				)}
 			>

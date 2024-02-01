@@ -7,7 +7,7 @@ interface ProjectListProps {
 }
 const ProjectList: React.FC<ProjectListProps> = ({ projects, userId }) => {
 	return (
-		<ul className="w-full text-violet-900">
+		<ul className="w-full text-black">
 			{Array.isArray(projects) && projects.length
 				? projects.map((project) => (
 						<Project key={project.id} project={project} userId={userId} />

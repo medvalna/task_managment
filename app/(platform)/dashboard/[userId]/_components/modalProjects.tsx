@@ -3,12 +3,12 @@ import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
 import { addProjectPrisma, editProjectPrisma } from "@/app/(api)/apiProjects";
 import { FaPen } from "react-icons/fa";
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -82,11 +82,11 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 				className={
 					isEditing
 						? cn(
-								" px-3 py-3 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+								" px-3 py-3 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
 								headingFont.className,
 						  )
 						: cn(
-								" px-2 py-2 h-full w-auto rounded-lg text-m text-violet-950 hover:bg-violet-300 ",
+								" px-2 py-2 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
 								headingFont.className,
 						  )
 				}
@@ -94,9 +94,9 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 				onClick={() => setShowModal(true)}
 			>
 				{isEditing ? (
-					<FaPen className="text-violet-950 py-2 px-2" />
+					<FaPen className="text-black py-2 px-2" />
 				) : (
-					<Plus className="text-violet-950" />
+					<Plus className="text-black" />
 				)}
 			</Button>
 			{showModal ? (

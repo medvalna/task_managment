@@ -1,10 +1,10 @@
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
 import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 
-const headingFont = Inter({
+const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
 });
@@ -13,7 +13,7 @@ const InboxPage = async () => {
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
 			<div className="text-left my-5 mx-5 flex space-x-2">
-				<div className={cn("text-2xl text-violet-900", headingFont.className)}>
+				<div className={cn("text-2xl text-black", headingFont.className)}>
 					Inbox
 				</div>
 				<Modal project="inbox" isEditing={false} task={null} />
