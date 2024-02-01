@@ -48,7 +48,7 @@ const LandingPage = () => {
 				seamlessly!
 			</div>
 
-			<Button className="mt-6 h-12 w-64 group relative overflow-hidden rounded-lg transition-color duration-500 bg-slate-900 hover:bg-violet-400 hover:border-2 hover:border-slate-900 -text-lg shadow">
+			<Button className="mt-12 h-12 w-64 group relative overflow-hidden rounded-lg transition-color duration-500 bg-slate-900 hover:bg-violet-400 hover:border-2 hover:border-slate-900 -text-lg shadow">
 				<span
 					className={cn("text-3xl relative text-white ", headingFont.className)}
 				>
