@@ -1,12 +1,16 @@
+import { getUserId } from "@/app/(api)/apiUser";
 import { SideBar } from "./_components/sidebar";
+import { getAllProjectsPrisma } from "@/app/(api)/apiProjects";
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout = async ({ children }: { children: React.ReactNode }) => {
+	const userId = await getUserId();
+	const projects = await getAllProjectsPrisma();
 	return (
 		<div>
 			<main className="mx-auto">
 				<div className="flex">
-					<div className="w-64 shrink-0 hidden md:block">
-						<SideBar />
+					<div className="bg-violet-50 md:block">
+						<SideBar userId={userId} projects={projects} />
 					</div>
 					{children}
 				</div>
