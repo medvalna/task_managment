@@ -82,11 +82,11 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 				className={
 					isEditing
 						? cn(
-								" px-3 py-3 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
+								" px-3 py-3 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 								headingFont.className,
 						  )
 						: cn(
-								" px-2 py-2 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
+								" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 								headingFont.className,
 						  )
 				}
@@ -94,9 +94,9 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 				onClick={() => setShowModal(true)}
 			>
 				{isEditing ? (
-					<FaPen className="text-black py-2 px-2" />
+					<FaPen className="text_slate-900 py-2 px-2" />
 				) : (
-					<Plus className="text-black" />
+					<Plus className="text_slate-900" />
 				)}
 			</Button>
 			{showModal ? (
@@ -127,7 +127,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 										</h3>
 									)}
 									<button
-										className=" text-slate-600 hover:text-black text-3xl"
+										className=" text-slate-600 hover:text_slate-900 text-3xl"
 										onClick={() => setShowModal(false)}
 									>
 										<span className=" text-2xl font-semibold h-5 w-5 block">

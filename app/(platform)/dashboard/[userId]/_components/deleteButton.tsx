@@ -22,7 +22,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
 	};
 	return (
 		<FaRegTrashAlt
-			className="rounded-lg hover:bg-violet-300 text-black py-3 w-10 h-10"
+			className="rounded-lg hover:bg-violet-300 text_slate-900 py-3 w-10 h-10"
 			onClick={handleDeleteProjButton}
 		/>
 	);

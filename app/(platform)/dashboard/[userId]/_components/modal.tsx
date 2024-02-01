@@ -135,7 +135,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 		<>
 			{isEditing ? (
 				<FaEdit
-					className="text-black"
+					className="text_slate-900"
 					cursor="pointer"
 					size={25}
 					onClick={() => setShowModal(true)}
@@ -144,13 +144,13 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 				<Button
 					variant="outline"
 					className={cn(
-						" px-2 py-2 h-full w-auto rounded-lg text-m text-black hover:bg-violet-300 ",
+						" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 						headingFont.className,
 					)}
 					asChild
 					onClick={() => setShowModal(true)}
 				>
-					<Plus className="text-black" />
+					<Plus className="text_slate-900" />
 				</Button>
 			)}
 			{showModal ? (
@@ -183,7 +183,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 										)}
 									</>
 									<button
-										className=" text-slate-600 hover:text-black text-3xl"
+										className=" text-slate-600 hover:text_slate-900 text-3xl"
 										onClick={() => setShowModal(false)}
 									>
 										<RxCross1 className=" text-2xl font-semibold h-5 w-5 block" />
@@ -232,7 +232,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
 										/>
 										<RxCross1
-											className="mt-2 ml-3 text-black"
+											className="mt-2 ml-3 text_slate-900"
 											cursor="pointer"
 											size={25}
 											onClick={handleClearDate}

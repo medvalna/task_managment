@@ -9,7 +9,7 @@ import { getUserId } from "@/app/(api)/apiUser";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
-	weight: ["400"],
+	weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 const TodayPage = async () => {
@@ -21,17 +21,16 @@ const TodayPage = async () => {
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
 			<div className="text-left my-5 mx-5 flex space-x-2">
-				<div className={cn("text-2xl text-black", headingFont.className)}>
-					{projectName}
+				<div
+					className={cn(
+						"text-2xl text_slate-900 font-medium",
+						headingFont.className,
+					)}
+				>
+					Today
 				</div>
+
 				<Modal project={projectName} isEditing={false} task={null} />
-				<ModalProject
-					isEditing={true}
-					projectName={projectName}
-					projectId={projectId}
-					userId={userId}
-				/>
-				<DeleteButton projectId={projectId} projectName={projectName} />
 			</div>
 			<TodoList tasks={tasks} project={"inbox"} />
 		</div>

@@ -22,7 +22,7 @@ const Project: React.FC<ProjectsProps> = ({ project, userId }) => {
 			<Button
 				asChild
 				className={cn(
-					"pl-2 block h-full w-full rounded-sm text-lg text-black hover:bg-violet-200 focus:bg-violet-300",
+					"pl-2 block h-full w-full rounded-sm text-lg text_slate-900 hover:bg-violet-200 focus:bg-violet-300",
 					headingFont.className,
 				)}
 			>

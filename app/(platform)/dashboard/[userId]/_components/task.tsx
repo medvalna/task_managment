@@ -63,23 +63,23 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 			<div className="flex w-3/4">
 				{task.isDone ? (
 					<MdCheckBox
-						className="text-black"
+						className="text_slate-900"
 						cursor="pointer"
 						size={25}
 						onClick={handleDoneTodo}
 					/>
 				) : (
 					<MdCheckBoxOutlineBlank
-						className="text-black"
+						className="text_slate-900"
 						cursor="pointer"
 						size={25}
 						onClick={handleDoneTodo}
 					/>
 				)}
-				<div className="grid grid-cols-1 text-black">
+				<div className="grid grid-cols-1 text_slate-900">
 					<div
 						className={cn(
-							task.isDone ? "text-black line-through" : "text-black",
+							task.isDone ? "text_slate-900 line-through" : "text_slate-900",
 							"row-span-1 text-left pl-5 pr-10 text-xl",
 							headingFont.className,
 						)}
@@ -89,7 +89,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 					{task.date ? (
 						<div
 							className={cn(
-								"flex row-span-2 text-left pl-5 pr-10 text-black text-sm",
+								"flex row-span-2 text-left pl-5 pr-10 text_slate-900 text-sm",
 								headingFont.className,
 							)}
 						>
@@ -99,7 +99,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 
 					<div
 						className={cn(
-							"flex row-span-2 text-left pl-5 pr-10 text-black text-sm",
+							"flex row-span-2 text-left pl-5 pr-10 text_slate-900 text-sm",
 							headingFont.className,
 						)}
 					>
@@ -111,7 +111,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 			<div className="flex w-1/4 gap-2">
 				<Modal project={task.project} isEditing={true} task={task} />
 				<FaRegTrashAlt
-					className="text-black"
+					className="text_slate-900"
 					cursor="pointer"
 					size={25}
 					onClick={handleDeleteTodo}

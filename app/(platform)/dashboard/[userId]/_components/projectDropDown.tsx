@@ -32,12 +32,12 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
 				<Button
 					variant="outline"
 					className={cn(
-						" pl-2 block h-full w-full rounded-sm text-lg text-black hover:bg-violet-200 focus:bg-violet-300",
+						" pl-2 block h-full w-full rounded-sm text-lg text_slate-900 hover:bg-violet-200 focus:bg-violet-300",
 						headingFont.className,
 					)}
 					onClick={handleOpen}
 				>
-					<div className="flex justify-between w-full text-black">
+					<div className="flex justify-between w-full text_slate-900">
 						Project
 						<span className="hover:text-violet-700">
 							<IoMdArrowDropdown className="w-5 h-5 mt-1 mr-2" />
