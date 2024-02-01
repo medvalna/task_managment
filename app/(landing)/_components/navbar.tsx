@@ -11,7 +11,7 @@ const headingFont = Inter({
 });
 export const Navbar = () => {
 	return (
-		<div className="fixed top-0 w-full h-14 px-14 border-b shadow-sm bg-white flex items-center">
+		<div className="fixed top-0 w-full h-20 px-14 border-b shadow-sm bg-white flex items-center">
 			<div className="md:max-w-screen-2xl mx-auto flex items-center w-full justify-between">
 				<Logo />
 				<div
@@ -21,7 +21,7 @@ export const Navbar = () => {
 					<Button
 						variant="outline"
 						className={cn(
-							"outline outline-2 mb-2 mt-2 px-2 py-1 rounded-lg text-lg text-black hover:bg-violet-300",
+							"border-2 border-slate-900 mb-2 mt-2 px-4 py-3 rounded-lg text-md transition-color duration-500 bg-white text-black hover:bg-violet-300",
 							headingFont.className,
 						)}
 						asChild
@@ -31,7 +31,7 @@ export const Navbar = () => {
 					<Button
 						variant="default"
 						className={cn(
-							"mb-2 mt-2 px-2 py-1 rounded-lg bg-violet-950 text-lg text-white hover:bg-violet-300 hover:text-black",
+							"mb-2 mt-2 px-4 py-3 rounded-lg transition-color duration-500 bg-black text-md text-white hover:bg-violet-300 border-2 border-slate-900 hover:text-black",
 							headingFont.className,
 						)}
 						asChild

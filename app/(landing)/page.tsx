@@ -18,26 +18,23 @@ const LandingPage = () => {
 	return (
 		<div className="flex items-center justify-center flex-col">
 			<div className="flex items-center justify-center flex-col">
-				<div className="mb-8 flex items-center border shadow-sm p-4 bg-violet-200 text-black rounded-full uppercase">
-					<Check className={cn("h-6 w-6 mr-2", textFont.className)} />
+				<div className="mb-8 flex items-center border-2 border-slate-900 shadow-sm p-4 bg-violet-200 text-slate-900 rounded-lg uppercase">
+					<Check
+						className={cn(
+							"h-6 w-6 mr-2 text-sm text-slate-900",
+							textFont.className,
+						)}
+					/>
 					The best task manager
 				</div>
 				<h1
 					className={cn(
-						"text-5xl md:text-6xl text-center text-cyan-500 mb-6",
+						"text-5xl md:text-6xl text-center text- mb-6 text-slate-900",
 						headingFont.className,
 					)}
 				>
 					Task manager helps you achieve your goals
 				</h1>
-				<div
-					className={cn(
-						"text-3xl md:text-6xl bg-gradient-to-r from-cyan-500 to-pink-500 text-white p-2 px-6 rounded-lg pb-4 w-fit",
-						headingFont.className,
-					)}
-				>
-					work forward
-				</div>
 			</div>
 			<div
 				className={cn(
@@ -51,12 +48,9 @@ const LandingPage = () => {
 				seamlessly!
 			</div>
 
-			<Button className="mt-6 h-12 w-64 group relative overflow-hidden rounded-lg bg-violet-400 hover:bg-gradient-to-r from-cyan-500 to-pink-500 text-lg shadow">
+			<Button className="mt-6 h-12 w-64 group relative overflow-hidden rounded-lg transition-color duration-500 bg-slate-900 hover:bg-violet-400 hover:border-2 hover:border-slate-900 -text-lg shadow">
 				<span
-					className={cn(
-						"text-3xl relative text-black  hover:text-white ",
-						headingFont.className,
-					)}
+					className={cn("text-3xl relative text-white ", headingFont.className)}
 				>
 					<Link href="/sign-up">Get Task Manager!</Link>
 				</span>
