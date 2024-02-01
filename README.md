@@ -1,5 +1,6 @@
 # Task Manager
 
+## Playground: [visit site](https://task-managment-virid.vercel.app/)
 ## Description
 Application for task managment
 
@@ -19,3 +20,8 @@ Application for task managment
 - page for todays tasks
 - page for inbox tasks
 - custom project pages
+
+### Usage:
+`npm run dev` - for development
+
+`npx prisma studio` - for opening database
