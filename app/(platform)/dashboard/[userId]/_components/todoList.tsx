@@ -15,13 +15,6 @@ const TodoList: React.FC<TodoListProps> = ({ tasks, project }) => {
 						? tasks.map((task) => <Task key={task.id} task={task} />)
 						: null}
 				</ul>
-				<div className="border-b-2 border-violet-300 mr-60"></div>
-				<div className="flex">
-					<div className="w-3/4"></div>
-					<div className="w-1/4">
-						<Modal project={project} isEditing={false} task={null} />
-					</div>
-				</div>
 			</div>
 		</>
 	);
