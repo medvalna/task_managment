@@ -14,7 +14,6 @@ export const getAllTodosPrisma = async (
 			userId: userId,
 		},
 	});
-	projectId, ": ", tasks;
 	return tasks;
 };
 export const getAllTodaysTodosPrisma = async (userId: string) => {

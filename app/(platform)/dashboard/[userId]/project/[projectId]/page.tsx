@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import ModalProject from "../../_components/modalProjects";
 import DeleteButton from "../../_components/deleteButton";
 import { getProjectById } from "@/app/(api)/apiProjects";
+import DashboardTitle from "../../_components/dashboardTitle";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -32,7 +33,8 @@ const ProjectPage = async ({
 						headingFont.className,
 					)}
 				>
-					{projectName}
+					<DashboardTitle projectId={projectName} />
+					{/* {projectName} */}
 				</div>
 				<Modal isEditing={false} task={null} projectId={projectId} />
 				<ModalProject

@@ -59,8 +59,11 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 	};
 
 	return (
-		<li key={task.id} className="flex mb-4">
-			<div className="flex w-3/4">
+		<li
+			key={task.id}
+			className="group  transition-all duration-50 border-2 border-transparent hover:border-slate-800 hover:rounded-lg flex items-center mb-4 justify-between"
+		>
+			<div className="flex items-center p-4">
 				{task.isDone ? (
 					<MdCheckBox
 						className="text_slate-900"
@@ -70,7 +73,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 					/>
 				) : (
 					<MdCheckBoxOutlineBlank
-						className="text_slate-900"
+						className="transition-all duration-50 hover:text-slate-900 text-slate-600"
 						cursor="pointer"
 						size={25}
 						onClick={handleDoneTodo}
@@ -108,7 +111,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 				</div>
 			</div>
 
-			<div className="flex w-1/4 gap-2">
+			<div className="transition-all duration-50 opacity-0 group-hover:opacity-100 flex gap-2 p-4">
 				<Modal projectId={task.projectId} isEditing={true} task={task} />
 				<FaRegTrashAlt
 					className="text_slate-900"
