@@ -5,7 +5,7 @@ import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import ModalProject from "../../_components/modalProjects";
 import DeleteButton from "../../_components/deleteButton";
-import { getUserId } from "@/app/(api)/apiUser";
+import { getProjectById } from "@/app/(api)/apiProjects";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -13,14 +13,15 @@ const headingFont = Open_Sans({
 });
 
 const ProjectPage = async ({
-	searchParams,
+	params,
 }: {
-	searchParams: { [key: string]: string | undefined };
+	params: { userId: string; projectId: string };
 }) => {
-	const projectName = searchParams["name"] ?? "";
-	const projectId = searchParams["id"] ?? "";
-	const userId = await getUserId();
-	const tasks = await getAllTodosPrisma(`${projectName}`);
+	const projectId = params.projectId;
+	const project = await getProjectById(projectId);
+	const projectName = project.text;
+	const userId = params.userId;
+	const tasks = await getAllTodosPrisma(projectId, userId);
 
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">

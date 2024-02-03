@@ -8,8 +8,8 @@ const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700", "800"],
 });
-const InboxPage = async () => {
-	const tasks = await getAllTodosPrisma("inbox");
+const InboxPage = async ({ params }: { params: { userId: string } }) => {
+	const tasks = await getAllTodosPrisma("inbox", params.userId);
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
 			<div className="text-left my-5 mx-5 flex space-x-2">
