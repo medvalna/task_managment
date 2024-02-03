@@ -14,6 +14,7 @@ model Task {
     text String
     userId String
     project String
+    projectId String
     isDone Boolean
     date String?
 }

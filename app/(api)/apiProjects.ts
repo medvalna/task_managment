@@ -11,6 +11,12 @@ export const getAllProjectsPrisma = async (userId: string) => {
 
 	return projects;
 };
+export const getProjectById = async (projectId: string): Promise<IProject> => {
+	const res = await prisma.project.findUnique({
+		where: {
+			id: projectId,
+		},
+	});
 
 	return res;
 };
