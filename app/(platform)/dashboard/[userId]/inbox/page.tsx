@@ -3,13 +3,20 @@ import { cn } from "@/lib/utils";
 import Modal from "../_components/modal";
 import TodoList from "../_components/todoList";
 import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
+import {
+	addProjectPrisma,
+	checkifExistsProjectsPrisma,
+} from "@/app/(api)/apiProjects";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700", "800"],
 });
 const InboxPage = async ({ params }: { params: { userId: string } }) => {
-	const tasks = await getAllTodosPrisma("inbox", params.userId);
+	if (!(await checkifExistsProjectsPrisma(params.userId + "inbox"))) {
+		await addProjectPrisma(params.userId + "inbox", "inbox");
+	}
+	const tasks = await getAllTodosPrisma(params.userId + "inbox", params.userId);
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
 			<div className="text-left my-5 mx-5 flex space-x-2">
@@ -21,7 +28,11 @@ const InboxPage = async ({ params }: { params: { userId: string } }) => {
 				>
 					Inbox
 				</div>
-				<Modal project="inbox" isEditing={false} task={null} />
+				<Modal
+					projectId={params.userId + "inbox"}
+					isEditing={false}
+					task={null}
+				/>
 			</div>
 			<TodoList tasks={tasks} project="inbox" />
 		</div>

@@ -12,7 +12,6 @@ const headingFont = Open_Sans({
 const TodayPage = async ({ params }: { params: { userId: string } }) => {
 	const projectName = "inbox";
 	const tasks = await getAllTodaysTodosPrisma(params.userId);
-
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
 			<div className="text-left my-5 mx-5 flex space-x-2">
@@ -25,9 +24,13 @@ const TodayPage = async ({ params }: { params: { userId: string } }) => {
 					Today
 				</div>
 
-				<Modal project={projectName} isEditing={false} task={null} />
+				<Modal
+					projectId={params.userId + projectName}
+					isEditing={false}
+					task={null}
+				/>
 			</div>
-			<TodoList tasks={tasks} project={"inbox"} />
+			<TodoList tasks={tasks!} project={"inbox"} />
 		</div>
 	);
 };

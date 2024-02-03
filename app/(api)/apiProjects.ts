@@ -2,10 +2,24 @@
 import { IProject } from "@/types/projects";
 import { getUserId } from "./apiUser";
 import prisma from "@/lib/prisma";
+export const checkifExistsProjectsPrisma = async (
+	projectId: string,
+): Promise<boolean> => {
+	const project = await prisma.project.findUnique({
+		where: {
+			id: projectId,
+		},
+	});
+	if (project != null) return true;
+	else return false;
+};
 export const getAllProjectsPrisma = async (userId: string) => {
 	const projects = await prisma.project.findMany({
 		where: {
 			userId: userId,
+			NOT: {
+				text: { in: ["inbox", "today"] },
+			},
 		},
 	});
 
@@ -48,14 +62,6 @@ export const editProjectPrisma = async (
 		userId: userId,
 	};
 	console.log(project);
-	await prisma.task.updateMany({
-		where: {
-			project: prevName,
-		},
-		data: {
-			project: text,
-		},
-	});
 
 	await prisma.project.update({
 		where: {
@@ -67,13 +73,10 @@ export const editProjectPrisma = async (
 	});
 };
 
-export const deleteProjectPrisma = async (
-	projectId: string,
-	projName: string,
-): Promise<void> => {
+export const deleteProjectPrisma = async (projectId: string): Promise<void> => {
 	await prisma.task.deleteMany({
 		where: {
-			project: projName,
+			projectId: projectId,
 		},
 	});
 	await prisma.project.delete({

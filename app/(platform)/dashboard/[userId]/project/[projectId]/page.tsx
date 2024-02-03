@@ -34,7 +34,7 @@ const ProjectPage = async ({
 				>
 					{projectName}
 				</div>
-				<Modal project={projectName} isEditing={false} task={null} />
+				<Modal isEditing={false} task={null} projectId={projectId} />
 				<ModalProject
 					isEditing={true}
 					projectName={projectName}

@@ -4,10 +4,13 @@ import { getUserId } from "./apiUser";
 
 import prisma from "@/lib/prisma";
 
-export const getAllTodosPrisma = async (projectId: string, userId: string) => {
+export const getAllTodosPrisma = async (
+	projectId: string,
+	userId: string,
+): Promise<ITask[]> => {
 	const tasks = await prisma.task.findMany({
 		where: {
-			project: projectId,
+			projectId: projectId,
 			userId: userId,
 		},
 	});
@@ -29,18 +32,19 @@ export const getAllTodaysTodosPrisma = async (userId: string) => {
 export const addTodoPrisma = async (
 	todoId: string,
 	text: string,
-	project: string,
+	projectId: string,
 	date: Date | null | String,
 ): Promise<ITask> => {
+	console.log(projectId);
 	const userId = await getUserId();
 	const res = await prisma.task.create({
 		data: {
 			id: todoId,
 			text: text,
 			userId: userId,
-			project: project,
 			isDone: false,
 			date: date?.toString(),
+			projectId: projectId,
 		},
 	});
 	const newTodo = await res;
@@ -77,7 +81,7 @@ export const editTodoPrisma = async (
 			text: newTask,
 			isDone: isDone,
 			date: dateP,
-			project: project,
+			projectId: project,
 		},
 	});
 };

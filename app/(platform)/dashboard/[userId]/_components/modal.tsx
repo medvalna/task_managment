@@ -19,12 +19,12 @@ const headingFont = Open_Sans({
 });
 
 interface ModalProps {
-	project: string;
+	projectId: string;
 	isEditing: boolean;
 	task: ITask | null;
 }
 
-const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
+const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	const router = useRouter();
 	const [selectedDate, setSelectedDate] = useState<Date | string | null>(
 		task ? task.date : "",
@@ -58,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
-		await addTodoPrisma(uuidv4(), newTask, project, data);
+		await addTodoPrisma(uuidv4(), newTask, projectId, data);
 		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
@@ -75,7 +75,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
-		await addTodoPrisma(uuidv4(), newTask, project, data);
+		await addTodoPrisma(uuidv4(), newTask, projectId, data);
 		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
@@ -93,7 +93,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 			: selectedDate;
 		console.log("sel date:", data);
 		if (task)
-			await editTodoPrisma(task.id, newTask, task.project, task.isDone, data);
+			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
 		router.refresh();
 	};
@@ -109,7 +109,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 			: selectedDate;
 		console.log("sel date:", data);
 		if (task)
-			await editTodoPrisma(task.id, newTask, task.project, task.isDone, data);
+			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
 		router.refresh();
 	};
@@ -124,7 +124,7 @@ const Modal: React.FC<ModalProps> = ({ project, isEditing, task }) => {
 			await editTodoPrisma(
 				task.id,
 				newTask,
-				task.project,
+				task.projectId,
 				task.isDone,
 				selectedDate,
 			);

@@ -13,7 +13,6 @@ model Task {
     id String @unique
     text String
     userId String
-    project String
     projectId String
     isDone Boolean
     date String?

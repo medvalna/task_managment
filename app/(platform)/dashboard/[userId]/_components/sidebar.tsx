@@ -20,12 +20,6 @@ interface SideBarProps {
 	projects: IProject[];
 }
 export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
-	//const userId = await getUserId();
-	//const projects = await getAllProjectsPrisma();
-	//let showSideBar = true;
-	// const changeState = (state: boolean) => {
-	// 	return !state;
-	// };
 	const [showSideBar, setShowSidebar] = React.useState(true);
 	return (
 		<>
@@ -51,7 +45,7 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 								asChild
 								onClick={() => setShowSidebar(false)}
 							>
-								<FiSidebar classname="text_slate-900" />
+								<FiSidebar className="text_slate-900" />
 							</Button>
 						</div>
 					</div>
@@ -67,7 +61,7 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 						>
 							<Link href={"/dashboard/" + userId + "/inbox/"}>Inbox</Link>
 						</Button>
-						<Modal project="inbox" isEditing={false} task={null} />
+						<Modal projectId={userId + "inbox"} isEditing={false} task={null} />
 					</div>
 					<div className="flex items-center justify-between w-full mr-2">
 						<Button
@@ -80,7 +74,7 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 						>
 							<Link href={"/dashboard/" + userId + "/today/"}>Today</Link>
 						</Button>
-						<Modal project="today" isEditing={false} task={null} />
+						<Modal projectId={userId + "today"} isEditing={false} task={null} />
 					</div>
 					<ProjectDropDown projects={projects} userId={userId} />
 				</div>
@@ -95,7 +89,7 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 						asChild
 						onClick={() => setShowSidebar(true)}
 					>
-						<FiSidebar classname="text_slate-900" />
+						<FiSidebar className="text_slate-900" />
 					</Button>
 				</div>
 			)}

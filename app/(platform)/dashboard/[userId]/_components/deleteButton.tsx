@@ -17,7 +17,7 @@ const DeleteButton: React.FC<DeleteButtonProps> = ({
 	) => {
 		e.preventDefault();
 		router.push("/");
-		await deleteProjectPrisma(projectId, projectName);
+		await deleteProjectPrisma(projectId);
 		router.refresh();
 	};
 	return (

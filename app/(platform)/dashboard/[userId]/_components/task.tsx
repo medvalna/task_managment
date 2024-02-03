@@ -5,12 +5,12 @@ import { Open_Sans } from "next/font/google";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
-import { FormEventHandler } from "react";
+import React, { FormEventHandler } from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import "flatpickr/dist/themes/material_green.css";
-import React from "react";
 import Modal from "./modal";
+import { getProjectById } from "@/app/(api)/apiProjects";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
@@ -20,6 +20,9 @@ interface TasksProps {
 	task: ITask;
 }
 const Task: React.FC<TasksProps> = ({ task }) => {
+	const router = useRouter();
+	//const project = await getProjectById(task.projectId);
+
 	const editDateFormat = (date: Date | null | string): string => {
 		if (date == null || date == undefined || date == "") {
 			return "";
@@ -38,7 +41,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 		//console.log("dataForm:", formattedDate);
 		return formattedDate;
 	};
-	const router = useRouter();
+
 	const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 		await deleteTodoPrisma(task.id);
@@ -51,7 +54,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 		await editTodoPrisma(
 			task.id,
 			task.text,
-			task.project,
+			task.projectId,
 			!task.isDone,
 			task.date,
 		);
@@ -103,13 +106,13 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 							headingFont.className,
 						)}
 					>
-						Project: {task.project}
+						{/* Project: {project.text} */}
 					</div>
 				</div>
 			</div>
 
 			<div className="flex w-1/4 gap-2">
-				<Modal project={task.project} isEditing={true} task={task} />
+				<Modal projectId={task.projectId} isEditing={true} task={task} />
 				<FaRegTrashAlt
 					className="text_slate-900"
 					cursor="pointer"
