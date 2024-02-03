@@ -59,10 +59,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
-		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
-		//setShowModal(false);
+		setShowModal(false);
 		router.refresh();
 	};
 
@@ -76,10 +75,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
-		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
-		//setShowModal(false);
+		setShowModal(false);
 		router.refresh();
 	};
 	/**
@@ -91,7 +89,6 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
-		console.log("sel date:", data);
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -107,7 +104,6 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
-		console.log("sel date:", data);
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -209,7 +205,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 										<Flatpickr
 											value={selectedDate ? new Date(selectedDate) : ""}
 											onChange={(date) => {
-												//console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
+												// ("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
 												setSelectedDate(
 													date[0]
 														.toUTCString()
@@ -217,7 +213,6 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 														.slice(0, 4)
 														.join(" "),
 												);
-												console.log("choosen date:", date[0]);
 											}}
 											placeholder={"Choose Date"}
 											options={{

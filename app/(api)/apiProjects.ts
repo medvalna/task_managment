@@ -61,7 +61,7 @@ export const editProjectPrisma = async (
 		text: text,
 		userId: userId,
 	};
-	console.log(project);
+	project;
 
 	await prisma.project.update({
 		where: {

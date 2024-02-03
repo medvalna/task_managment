@@ -14,7 +14,7 @@ export const getAllTodosPrisma = async (
 			userId: userId,
 		},
 	});
-	console.log(projectId, ": ", tasks);
+	projectId, ": ", tasks;
 	return tasks;
 };
 export const getAllTodaysTodosPrisma = async (userId: string) => {
@@ -35,7 +35,7 @@ export const addTodoPrisma = async (
 	projectId: string,
 	date: Date | null | String,
 ): Promise<ITask> => {
-	console.log(projectId);
+	projectId;
 	const userId = await getUserId();
 	const res = await prisma.task.create({
 		data: {

@@ -27,18 +27,15 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 		if (date == null || date == undefined || date == "") {
 			return "";
 		}
-		//console.log("DATA:", date);
 		const line = date.toString().split("-");
 		const dateFin = line.slice(0, 3);
 		dateFin[2] = dateFin[2]?.slice(0, 2);
-		//console.log("datafin:", dateFin.join("/"));
 		const dateForm = new Date(dateFin.join("/"));
 		const formattedDate = dateForm.toLocaleString("en-US", {
 			month: "long",
 			day: "numeric",
 			year: "numeric",
 		});
-		//console.log("dataForm:", formattedDate);
 		return formattedDate;
 	};
 
