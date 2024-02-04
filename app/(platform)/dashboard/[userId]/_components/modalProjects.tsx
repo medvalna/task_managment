@@ -2,7 +2,7 @@
 import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
+import { PlusIcon } from "@primer/octicons-react";
 import { Open_Sans } from "next/font/google";
 import { useRouter } from "next/navigation";
 import { v4 as uuidv4 } from "uuid";
@@ -52,7 +52,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 		e,
 	) => {
 		e.preventDefault();
-		await editProjectPrisma(projectId, newProject, projectName);
+		await editProjectPrisma(projectId, newProject);
 		setnewProject("");
 		//TODO: decide if we want to close modal after entering the task
 		setShowModal(false);
@@ -65,7 +65,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 		e,
 	) => {
 		e.preventDefault();
-		await editProjectPrisma(projectId, newProject, projectName);
+		await editProjectPrisma(projectId, newProject);
 		setnewProject("");
 		//TODO: decide if we want to close modal after entering the task
 		setShowModal(false);
@@ -90,13 +90,12 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 								headingFont.className,
 						  )
 				}
-				asChild
 				onClick={() => setShowModal(true)}
 			>
 				{isEditing ? (
 					<FaPen className="text_slate-900 py-2 px-2" />
 				) : (
-					<Plus className="text_slate-900" />
+					<PlusIcon className="text_slate-900" size={20} />
 				)}
 			</Button>
 			{showModal ? (
@@ -104,7 +103,7 @@ const ModalProject: React.FC<ModalProjectProps> = ({
 					<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 						<div className="relative w-auto my-6 mx-auto max-w-3xl">
 							{/*content*/}
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+							<div className="min-w-[500px] border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
 								{/*header*/}
 								<div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
 									{isEditing ? (

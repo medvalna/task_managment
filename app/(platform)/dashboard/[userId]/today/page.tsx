@@ -10,11 +10,10 @@ const headingFont = Open_Sans({
 });
 
 const TodayPage = async ({ params }: { params: { userId: string } }) => {
-	const projectName = "inbox";
 	const tasks = await getAllTodaysTodosPrisma(params.userId);
 	return (
 		<div className=" bg-violet-50 h-screen w-screen">
-			<div className="text-left my-5 mx-5 flex space-x-2">
+			<div className="ml-24 mr-40 mt-10 text-left flex space-x-2">
 				<div
 					className={cn(
 						"text-2xl text_slate-900 font-medium",
@@ -23,9 +22,8 @@ const TodayPage = async ({ params }: { params: { userId: string } }) => {
 				>
 					Today
 				</div>
-
 				<Modal
-					projectId={params.userId + projectName}
+					projectId={params.userId + "inbox"}
 					isEditing={false}
 					task={null}
 				/>

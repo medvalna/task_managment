@@ -2,7 +2,7 @@
 import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
+import { PencilIcon, PlusIcon } from "@primer/octicons-react";
 import { Open_Sans } from "next/font/google";
 import { addTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
@@ -59,9 +59,10 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
+		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
-		setShowModal(false);
+		//setShowModal(false);
 		router.refresh();
 	};
 
@@ -75,9 +76,10 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
+		console.log("sel date:", data);
 		setnewTask("");
 		//TODO: decide if we want to close modal after entering the task
-		setShowModal(false);
+		//setShowModal(false);
 		router.refresh();
 	};
 	/**
@@ -89,6 +91,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
+		console.log("sel date:", data);
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -104,6 +107,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 		const data = selectedDate
 			? dataFormatting(selectedDate.toString())
 			: selectedDate;
+		console.log("sel date:", data);
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -130,12 +134,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	return (
 		<>
 			{isEditing ? (
-				<FaEdit
-					className="text_slate-900"
-					cursor="pointer"
-					size={25}
-					onClick={() => setShowModal(true)}
-				/>
+				<Button onClick={() => setShowModal(true)}>
+					<PencilIcon size={20} className="text_slate-900 cursor-pointer" />
+				</Button>
 			) : (
 				<Button
 					variant="outline"
@@ -143,10 +144,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 						" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 						headingFont.className,
 					)}
-					asChild
 					onClick={() => setShowModal(true)}
 				>
-					<Plus className="text_slate-900" />
+					<PlusIcon className="text_slate-900" size={20} />
 				</Button>
 			)}
 			{showModal ? (
@@ -154,7 +154,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 					<div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none">
 						<div className="relative w-auto my-6 mx-auto max-w-3xl">
 							{/*content*/}
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+							<div className="min-w-[500px] border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
 								{/*header*/}
 								<div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
 									<>
@@ -205,7 +205,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 										<Flatpickr
 											value={selectedDate ? new Date(selectedDate) : ""}
 											onChange={(date) => {
-												// ("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
+												//console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
 												setSelectedDate(
 													date[0]
 														.toUTCString()

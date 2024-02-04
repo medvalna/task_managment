@@ -18,8 +18,8 @@ const InboxPage = async ({ params }: { params: { userId: string } }) => {
 	}
 	const tasks = await getAllTodosPrisma(params.userId + "inbox", params.userId);
 	return (
-		<div className=" bg-violet-50 h-screen w-screen">
-			<div className="text-left my-5 mx-5 flex space-x-2">
+		<div className="  bg-violet-50 h-screen w-screen">
+			<div className="ml-24 mr-40 mt-10 text-left flex space-x-2">
 				<div
 					className={cn(
 						"text-2xl text_slate-900 font-medium",

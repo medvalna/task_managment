@@ -7,6 +7,7 @@ import { Open_Sans } from "next/font/google";
 import ModalProject from "./modalProjects";
 import ProjectList from "./projectList";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { ChevronDownIcon, ChevronUpIcon } from "@primer/octicons-react";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
@@ -39,9 +40,15 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
 				>
 					<div className="flex justify-between w-full text_slate-900">
 						Project
-						<span className="hover:text-violet-700">
-							<IoMdArrowDropdown className="w-5 h-5 mt-1 mr-2" />
-						</span>
+						{isOpen ? (
+							<span className="hover:text-violet-700">
+								<ChevronUpIcon className="w-5 h-5 mt-1 mr-2" />
+							</span>
+						) : (
+							<span className="hover:text-violet-700">
+								<ChevronDownIcon className="w-5 h-5 mt-1 mr-2" />
+							</span>
+						)}
 					</div>
 				</Button>
 

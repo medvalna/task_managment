@@ -53,7 +53,6 @@ export const addProjectPrisma = async (
 export const editProjectPrisma = async (
 	projectId: string,
 	text: string,
-	prevName: string,
 ): Promise<void> => {
 	const userId = await getUserId();
 	const project: IProject = {

@@ -11,6 +11,7 @@ import { ProjectDropDown } from "./projectDropDown";
 import { FiSidebar } from "react-icons/fi";
 import React from "react";
 import { IProject } from "@/types/projects";
+import { SidebarCollapseIcon, SidebarExpandIcon } from "@primer/octicons-react";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["300", "400", "500", "600", "700", "800"],
@@ -42,10 +43,9 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 									" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 									headingFont.className,
 								)}
-								asChild
 								onClick={() => setShowSidebar(false)}
 							>
-								<FiSidebar className="text_slate-900" />
+								<SidebarExpandIcon size={24} className="text_slate-900" />
 							</Button>
 						</div>
 					</div>
@@ -86,10 +86,9 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 							" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 ",
 							headingFont.className,
 						)}
-						asChild
 						onClick={() => setShowSidebar(true)}
 					>
-						<FiSidebar className="text_slate-900" />
+						<SidebarCollapseIcon size={24} className="text_slate-900" />
 					</Button>
 				</div>
 			)}

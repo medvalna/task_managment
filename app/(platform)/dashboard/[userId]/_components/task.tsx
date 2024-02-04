@@ -5,12 +5,14 @@ import { Open_Sans } from "next/font/google";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { MdCheckBox } from "react-icons/md";
 import { FaRegTrashAlt } from "react-icons/fa";
-import React, { FormEventHandler } from "react";
+import React, { FormEventHandler, MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
 import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import "flatpickr/dist/themes/material_green.css";
 import Modal from "./modal";
 import { getProjectById } from "@/app/(api)/apiProjects";
+import { Button } from "@/components/ui/button";
+import { TrashIcon } from "@primer/octicons-react";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
@@ -39,14 +41,14 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 		return formattedDate;
 	};
 
-	const handleDeleteTodo: FormEventHandler<HTMLFormElement> = async (e) => {
+	const handleDeleteTodo: MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 		await deleteTodoPrisma(task.id);
 
 		router.refresh();
 	};
 	const handleDoneTodo: FormEventHandler<HTMLFormElement> = async (e) => {
-		e.preventDefault();
+		//e.preventDefault();
 
 		await editTodoPrisma(
 			task.id,
@@ -113,12 +115,12 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 
 			<div className="transition-all duration-50 opacity-0 group-hover:opacity-100 flex gap-2 p-4">
 				<Modal projectId={task.projectId} isEditing={true} task={task} />
-				<FaRegTrashAlt
-					className="text_slate-900"
-					cursor="pointer"
-					size={25}
-					onClick={handleDeleteTodo}
-				/>
+				<Button onClick={handleDeleteTodo}>
+					<TrashIcon
+						size={20}
+						className="rounded-lg hover:bg-violet-300 text_slate-900 cursor-pointer"
+					/>
+				</Button>
 			</div>
 		</li>
 	);
