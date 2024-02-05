@@ -41,7 +41,7 @@ const DashboardTitle: React.FC<DashboardTitleProps> = ({
 	}, [debouncedValue]);
 
 	return (
-		<div className="w-full group flex ml-16 mr-40 group  transition-all duration-50 border-1 border-transparent hover:border-slate-700 hover:rounded-lg items-center justify-between">
+		<div className="w-full group flex ml-16 mr-40 group  transition-all duration-50 border-1 border-transparent hover:border-slate-700 hover:rounded-lg items-center">
 			<div className="p-4 items-center ">
 				<Input
 					sx={{ width: 1, fontFamily: headingFont, fontSize: 24 }}

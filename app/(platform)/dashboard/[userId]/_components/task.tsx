@@ -63,9 +63,9 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 	return (
 		<li
 			key={task.id}
-			className="group  transition-all duration-50 border-2 border-transparent hover:border-slate-800 hover:rounded-lg flex items-center mb-4 justify-between"
+			className="group  transition-all duration-50 border-2 my-1 border-transparent hover:border-slate-800 hover:rounded-lg flex items-center justify-between"
 		>
-			<div className="flex items-center p-4">
+			<div className="flex items-center px-4">
 				{task.isDone ? (
 					<MdCheckBox
 						className="text_slate-900"
