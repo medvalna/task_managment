@@ -1,4 +1,4 @@
-import { SideBar } from "./_components/Sidebar";
+import { SideBar } from "./_components/sidebar";
 import { getAllProjectsPrisma } from "@/app/(api)/apiProjects";
 
 const DashboardLayout = async ({

@@ -6,7 +6,7 @@ import {
 	addProjectPrisma,
 	checkifExistsProjectsPrisma,
 } from "@/app/(api)/apiProjects";
-import ModalTask from "../_components/ModalTask";
+import ModalTask from "../_components/modalTask";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],

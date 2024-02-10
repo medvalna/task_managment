@@ -1,12 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Open_Sans } from "next/font/google";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "./deleteButton";
 import { Input } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { editProjectPrisma } from "@/app/(api)/apiProjects";
 import { useDebounce } from "use-debounce";
-import NewModal from "./ModalTask";
+import NewModal from "./modalTask";
 interface DashboardTitleProps {
 	projectId: string;
 	projectName: string;

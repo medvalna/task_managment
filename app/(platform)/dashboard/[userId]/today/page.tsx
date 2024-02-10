@@ -2,7 +2,7 @@ import { getAllTodaysTodosPrisma } from "@/app/(api)/apiTasks";
 import TodoList from "../_components/todoList";
 import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import ModalTask from "../_components/ModalTask";
+import ModalTask from "../_components/modalTask";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],

@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 import { IProject } from "@/types/projects";
 import { useState } from "react";
 import { Open_Sans } from "next/font/google";
-import ModalProject from "./ModalProject";
-import ProjectList from "./ProjectList";
+import ModalProject from "./modalProject";
+import ProjectList from "./projectList";
 import { ChevronDownIcon, ChevronUpIcon } from "@primer/octicons-react";
 const headingFont = Open_Sans({
 	subsets: ["latin"],

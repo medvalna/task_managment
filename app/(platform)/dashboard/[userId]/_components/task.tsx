@@ -10,7 +10,7 @@ import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import "flatpickr/dist/themes/material_green.css";
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "@primer/octicons-react";
-import ModalTask from "./ModalTask";
+import ModalTask from "./modalTask";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
