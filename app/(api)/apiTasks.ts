@@ -1,4 +1,5 @@
 "use server";
+import dayjs from "dayjs";
 import { ITask } from "../../types/tasks";
 import { getUserId } from "./apiUser";
 
@@ -17,12 +18,13 @@ export const getAllTodosPrisma = async (
 	return tasks;
 };
 export const getAllTodaysTodosPrisma = async (userId: string) => {
-	let now = new Date();
-	let today = now.toUTCString().split(" ").slice(0, 4).join(" ");
+	const now = dayjs().toString();
+	const today = now.split(" ").slice(1, 4);
+	const fin = today[0] + " " + today[1] + " " + today[2];
 	const tasks = await prisma.task.findMany({
 		where: {
 			userId: userId,
-			date: today,
+			date: fin,
 		},
 	});
 	return tasks;
@@ -32,7 +34,7 @@ export const addTodoPrisma = async (
 	todoId: string,
 	text: string,
 	projectId: string,
-	date: Date | null | String,
+	date: Date | null | string | undefined,
 ): Promise<ITask> => {
 	projectId;
 	const userId = await getUserId();
@@ -63,7 +65,7 @@ export const editTodoPrisma = async (
 	newTask: string,
 	project: string,
 	isDone: boolean,
-	date: Date | null | String,
+	date: Date | null | string | undefined,
 ): Promise<void> => {
 	let dateP;
 	if (date != null) {

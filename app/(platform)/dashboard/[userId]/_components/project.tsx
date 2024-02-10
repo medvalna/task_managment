@@ -32,7 +32,6 @@ const Project: React.FC<ProjectsProps> = ({ project, userId }) => {
 						query: { name: project.text, id: project.id },
 					}}
 				>
-					{" "}
 					{project.text}
 				</Link>
 			</Button>

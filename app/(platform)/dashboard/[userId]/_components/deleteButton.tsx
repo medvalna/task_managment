@@ -2,7 +2,6 @@
 import { deleteProjectPrisma } from "@/app/(api)/apiProjects";
 import { MouseEventHandler } from "react";
 import { useRouter } from "next/navigation";
-import { FaRegTrashAlt } from "react-icons/fa";
 import { TrashIcon } from "@primer/octicons-react";
 import { Button } from "@/components/ui/button";
 interface DeleteButtonProps {

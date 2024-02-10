@@ -1,5 +1,5 @@
 import { IProject } from "@/types/projects";
-import Project from "./project";
+import Project from "./Project";
 
 interface ProjectListProps {
 	projects: IProject[];

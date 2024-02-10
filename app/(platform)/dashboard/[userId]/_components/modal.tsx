@@ -2,7 +2,7 @@
 import React, { FormEventHandler, MouseEventHandler, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { PencilIcon, PlusIcon } from "@primer/octicons-react";
+import { PencilIcon, PlusIcon, XIcon } from "@primer/octicons-react";
 import { Open_Sans } from "next/font/google";
 import { addTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import { useRouter } from "next/navigation";
@@ -10,8 +10,6 @@ import { v4 as uuidv4 } from "uuid";
 import Flatpickr from "react-flatpickr";
 import "flatpickr/dist/themes/airbnb.css";
 import { ITask } from "@/types/tasks";
-import { FaEdit } from "react-icons/fa";
-import { RxCross1 } from "react-icons/rx";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -55,14 +53,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	const handleSaveButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 
-		const data = selectedDate
-			? dataFormatting(selectedDate.toString())
-			: selectedDate;
+		const data = selectedDate && dataFormatting(selectedDate.toString());
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
-		console.log("sel date:", data);
 		setnewTask("");
-		//TODO: decide if we want to close modal after entering the task
-		//setShowModal(false);
 		router.refresh();
 	};
 
@@ -72,14 +65,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	const handleSubmitNewTodo: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 
-		const data = selectedDate
-			? dataFormatting(selectedDate.toString())
-			: selectedDate;
+		const data = selectedDate && dataFormatting(selectedDate.toString());
 		await addTodoPrisma(uuidv4(), newTask, projectId, data);
-		console.log("sel date:", data);
 		setnewTask("");
-		//TODO: decide if we want to close modal after entering the task
-		//setShowModal(false);
 		router.refresh();
 	};
 	/**
@@ -88,10 +76,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	const handleEditButton: MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 
-		const data = selectedDate
-			? dataFormatting(selectedDate.toString())
-			: selectedDate;
-		console.log("sel date:", data);
+		const data = selectedDate && dataFormatting(selectedDate.toString());
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -104,10 +89,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	const handleSubmitEditTodo: FormEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
 
-		const data = selectedDate
-			? dataFormatting(selectedDate.toString())
-			: selectedDate;
-		console.log("sel date:", data);
+		const data = selectedDate && dataFormatting(selectedDate.toString());
 		if (task)
 			await editTodoPrisma(task.id, newTask, task.projectId, task.isDone, data);
 		setShowModal(false);
@@ -117,7 +99,7 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	/**
 	 * Clearing date with pressing cross
 	 */
-	const handleClearDate: FormEventHandler<HTMLFormElement> = async (e) => {
+	const handleClearDate: MouseEventHandler<HTMLButtonElement> = async (e) => {
 		e.preventDefault();
 		setSelectedDate(null);
 		if (task)
@@ -134,8 +116,15 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 	return (
 		<>
 			{isEditing ? (
-				<Button onClick={() => setShowModal(true)}>
-					<PencilIcon size={20} className="text_slate-900 cursor-pointer" />
+				<Button
+					variant="outline"
+					className=" px-2 py-2 h-full w-auto rounded-lg text-m text_slate-900 hover:bg-violet-300 "
+					onClick={() => setShowModal(true)}
+				>
+					<PencilIcon
+						size={20}
+						className="rounded-lg hover:bg-violet-300 text_slate-900"
+					/>
 				</Button>
 			) : (
 				<Button
@@ -178,12 +167,12 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 											</h3>
 										)}
 									</>
-									<button
+									<Button
 										className=" text-slate-600 hover:text_slate-900 text-3xl"
 										onClick={() => setShowModal(false)}
 									>
-										<RxCross1 className=" text-2xl font-semibold h-5 w-5 block" />
-									</button>
+										<XIcon size={25} />
+									</Button>
 								</div>
 								{/*body*/}
 								<div className="relative p-6 flex-auto">
@@ -204,8 +193,9 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 									<form className="flex">
 										<Flatpickr
 											value={selectedDate ? new Date(selectedDate) : ""}
+											onOpen={() => setShowModal(true)}
 											onChange={(date) => {
-												//console.log("before date:", selectedDate, " date: ", date, "\n date[0]: ", date[0]);
+												setShowModal(true);
 												setSelectedDate(
 													date[0]
 														.toUTCString()
@@ -213,25 +203,23 @@ const Modal: React.FC<ModalProps> = ({ projectId, isEditing, task }) => {
 														.slice(0, 4)
 														.join(" "),
 												);
+												setShowModal(true);
 											}}
 											placeholder={"Choose Date"}
 											options={{
 												minDate: "today",
 												enableTime: false,
-												//altInput: true,
-												//altFormat: "F j, Y",
-												//defaultDate: new Date(selectedDate!),
 												dateFormat: "Y-m-d",
-												// You can customize the date picker options here
 											}}
 											className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:border-violet-500 focus:border-2 focus:outline-none focus:ring-violet-400 focus:ring-1  block w-full p-2.5"
 										/>
-										<RxCross1
-											className="mt-2 ml-3 text_slate-900"
-											cursor="pointer"
-											size={25}
+										<Button
+											className="mt-2 ml-3 text_slate-900
+											cursor-pointer"
 											onClick={handleClearDate}
-										/>
+										>
+											<XIcon size={25} />
+										</Button>
 									</form>
 								</div>
 								{/*footer*/}

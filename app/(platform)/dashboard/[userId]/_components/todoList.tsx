@@ -1,5 +1,5 @@
 import { ITask } from "@/types/tasks";
-import Task from "./task";
+import Task from "./Task";
 
 interface TodoListProps {
 	tasks: ITask[];

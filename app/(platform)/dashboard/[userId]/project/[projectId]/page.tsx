@@ -1,9 +1,9 @@
 import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 
-import TodoList from "../../_components/todoList";
+import TodoList from "../../_components/TodoList";
 
 import { getProjectById } from "@/app/(api)/apiProjects";
-import DashboardTitle from "../../_components/dashboardTitle";
+import DashboardTitle from "../../_components/DashboardTitle";
 
 const ProjectPage = async ({
 	params,

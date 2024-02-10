@@ -4,9 +4,8 @@ import { cn } from "@/lib/utils";
 import { IProject } from "@/types/projects";
 import { useState } from "react";
 import { Open_Sans } from "next/font/google";
-import ModalProject from "./modalProjects";
-import ProjectList from "./projectList";
-import { IoMdArrowDropdown } from "react-icons/io";
+import ModalProject from "./ModalProject";
+import ProjectList from "./ProjectList";
 import { ChevronDownIcon, ChevronUpIcon } from "@primer/octicons-react";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -52,7 +51,7 @@ export const ProjectDropDown: React.FC<ProjectDropDownProps> = ({
 					</div>
 				</Button>
 
-				<ModalProject isEditing={false} projectName="" projectId="" userId="" />
+				<ModalProject />
 			</div>
 			{isOpen && (
 				<div
