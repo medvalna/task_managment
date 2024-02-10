@@ -10,7 +10,7 @@ import { deleteTodoPrisma, editTodoPrisma } from "@/app/(api)/apiTasks";
 import "flatpickr/dist/themes/material_green.css";
 import { Button } from "@/components/ui/button";
 import { TrashIcon } from "@primer/octicons-react";
-import NewModal from "./NewModal";
+import ModalTask from "./ModalTask";
 const headingFont = Open_Sans({
 	subsets: ["latin"],
 	weight: ["400"],
@@ -108,7 +108,7 @@ const Task: React.FC<TasksProps> = ({ task }) => {
 			</div>
 
 			<div className="transition-all duration-50 opacity-0 group-hover:opacity-100 flex gap-2 p-4">
-				<NewModal projectId={task.projectId} isEditing={true} task={task} />
+				<ModalTask projectId={task.projectId} isEditing={true} task={task} />
 
 				<Button
 					variant="outline"

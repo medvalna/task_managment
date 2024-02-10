@@ -4,7 +4,7 @@ import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { UserButton } from "@clerk/nextjs";
-import Modal from "./Modal";
+import ModalTask from "./ModalTask";
 import { ProjectDropDown } from "./ProjectDropDown";
 import React from "react";
 import { IProject } from "@/types/projects";
@@ -58,7 +58,11 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 						>
 							<Link href={"/dashboard/" + userId + "/inbox/"}>Inbox</Link>
 						</Button>
-						<Modal projectId={userId + "inbox"} isEditing={false} task={null} />
+						<ModalTask
+							projectId={userId + "inbox"}
+							isEditing={false}
+							task={null}
+						/>
 					</div>
 					<div className="flex items-center justify-between w-full mr-2">
 						<Button
@@ -71,7 +75,11 @@ export const SideBar: React.FC<SideBarProps> = ({ projects, userId }) => {
 						>
 							<Link href={"/dashboard/" + userId + "/today/"}>Today</Link>
 						</Button>
-						<Modal projectId={userId + "today"} isEditing={false} task={null} />
+						<ModalTask
+							projectId={userId + "inbox"}
+							isEditing={false}
+							task={null}
+						/>
 					</div>
 					<ProjectDropDown projects={projects} userId={userId} />
 				</div>

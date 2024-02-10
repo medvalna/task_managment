@@ -1,8 +1,8 @@
 import { getAllTodaysTodosPrisma } from "@/app/(api)/apiTasks";
-import TodoList from "../_components/TodoList";
+import TodoList from "../_components/todoList";
 import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import NewModal from "../_components/NewModal";
+import ModalTask from "../_components/ModalTask";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -22,7 +22,7 @@ const TodayPage = async ({ params }: { params: { userId: string } }) => {
 				>
 					Today
 				</div>
-				<NewModal
+				<ModalTask
 					projectId={params.userId + "inbox"}
 					isEditing={false}
 					task={null}

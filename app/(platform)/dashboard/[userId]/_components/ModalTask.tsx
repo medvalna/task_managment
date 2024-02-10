@@ -19,13 +19,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
-interface NewModalProps {
+interface ModalTaskProps {
 	projectId: string;
 	isEditing: boolean;
 	task: ITask | null;
 }
 
-const NewModal: React.FC<NewModalProps> = ({ projectId, isEditing, task }) => {
+const ModalTask: React.FC<ModalTaskProps> = ({
+	projectId,
+	isEditing,
+	task,
+}) => {
 	const router = useRouter();
 	const [selectedDate, setSelectedDate] = useState<Dayjs | null>(
 		task ? dayjs(task.date) : dayjs(""),
@@ -206,4 +210,4 @@ const NewModal: React.FC<NewModalProps> = ({ projectId, isEditing, task }) => {
 	);
 };
 
-export default NewModal;
+export default ModalTask;

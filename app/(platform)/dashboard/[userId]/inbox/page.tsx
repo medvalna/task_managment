@@ -1,12 +1,12 @@
 import { Open_Sans } from "next/font/google";
 import { cn } from "@/lib/utils";
-import TodoList from "../_components/TodoList";
+import TodoList from "../_components/todoList";
 import { getAllTodosPrisma } from "@/app/(api)/apiTasks";
 import {
 	addProjectPrisma,
 	checkifExistsProjectsPrisma,
 } from "@/app/(api)/apiProjects";
-import NewModal from "../_components/NewModal";
+import ModalTask from "../_components/ModalTask";
 
 const headingFont = Open_Sans({
 	subsets: ["latin"],
@@ -28,7 +28,7 @@ const InboxPage = async ({ params }: { params: { userId: string } }) => {
 				>
 					Inbox
 				</div>
-				<NewModal
+				<ModalTask
 					projectId={params.userId + "inbox"}
 					isEditing={false}
 					task={null}

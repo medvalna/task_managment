@@ -1,13 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Open_Sans } from "next/font/google";
-import Modal from "./Modal";
 import DeleteButton from "./DeleteButton";
 import { Input } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { editProjectPrisma } from "@/app/(api)/apiProjects";
 import { useDebounce } from "use-debounce";
-import NewModal from "./NewModal";
+import NewModal from "./ModalTask";
 interface DashboardTitleProps {
 	projectId: string;
 	projectName: string;
@@ -51,7 +50,6 @@ const DashboardTitle: React.FC<DashboardTitleProps> = ({
 			</div>
 
 			<div className="transition-all duration-50 opacity-0 group-hover:opacity-100 flex">
-				<Modal isEditing={false} task={null} projectId={projectId} />
 				<NewModal isEditing={false} task={null} projectId={projectId} />
 				<DeleteButton projectId={projectId} projectName={projectName} />
 			</div>
