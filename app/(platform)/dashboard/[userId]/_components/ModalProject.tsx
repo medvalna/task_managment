@@ -52,7 +52,7 @@ const ModalProject = () => {
 				}}
 			>
 				<div className="flex items-center pr-1 justify-between">
-					<DialogTitle> "Add Project"</DialogTitle>
+					<DialogTitle>Add Project</DialogTitle>
 					<Button
 						onClick={() => setShowModal(false)}
 						variant="outline"
